@@ -43,5 +43,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "app-proyecto-api.vercel.app"
+  "proxy": "http://localhost:8800/Api/"
 }
