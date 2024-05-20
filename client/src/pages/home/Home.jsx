@@ -1,45 +1,47 @@
-import Navbar from "../../components/navbar/Navbar";
-import Featured from "../../components/featured/Featured";
-import "./home.scss";
-import List from "../../components/list/List";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useRef, useState } from "react";
+import ListItem from "../listItem/ListItem";
+import "./list.scss";
 
-const Home = ({ type }) => {
-  const [lists, setLists] = useState([]);
-  const [genre, setGenre] = useState(null);
+export default function List({ list }) {
+  const [isMoved, setIsMoved] = useState(false);
+  const [slideNumber, setSlideNumber] = useState(0);
+  const [clickLimit, setClickLimit] = useState(window.innerWidth / 230);
 
-  useEffect(() => {
-    const getRandomLists = async () => {
-      try {
-        const res = await axios.get(
-          `lists${type ? "?type=" + type : ""}${
-            genre ? "&genre=" + genre : ""
-          }`,
-          {
-            headers: {
-              token:
-              "Bearer "+JSON.parse(localStorage.getItem("user")).accessToken,
-            },
-          }
-        );
-        setLists(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getRandomLists();
-  }, [type, genre]);
+  const listRef = useRef();
 
+  const handleClick = (direction) => {
+    setIsMoved(true);
+    let distance = listRef.current.getBoundingClientRect().x - 50;
+    if (direction === "left" && slideNumber > 0) {
+      setSlideNumber(slideNumber - 1);
+      listRef.current.style.transform = `translateX(${230 + distance}px)`;
+    }
+    if (direction === "right" && slideNumber < 10 - clickLimit) {
+      setSlideNumber(slideNumber + 1);
+      listRef.current.style.transform = `translateX(${-230 + distance}px)`;
+    }
+  };
   return (
-    <div className="home">
-      <Navbar />
-      <Featured type={type} setGenre={setGenre} />
-      {lists.map((list) => (
-        <List list={list} />
-      ))}
+    <div className="list">
+      <span className="listTitle">{list.title}</span>
+      <div className="wrapper">
+        <ArrowBackIosIcon
+          className="sliderArrow left"
+          onClick={() => handleClick("left")}
+          style={{ display: !isMoved && "none" }}
+        />
+        <div className="container" ref={listRef}>
+          {list.content.map((item, i) => (
+            <ListItem index={i} item={item} />
+          ))}
+        </div>
+        <ArrowForwardIosIcon
+          className="sliderArrow right"
+          onClick={() => handleClick("right")}
+        />
+      </div>
     </div>
   );
-};
-
-export default Home;
+}
