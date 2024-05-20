@@ -25,6 +25,6 @@ app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 
-app.listen(8800, () => {
+app.listen("https://app-proyecto-api.vercel.app/", () => {
   console.log("Backend server is running!");
 });
