@@ -25,6 +25,10 @@ export default function List({ list }) {
       listRef.current.style.transform = translateX($-230 + distancepx);
     }
   };
+  if (!Array.isArray(list.content)) {
+    console.error("Expected list.content to be an array, but got:", list.content);
+    return null; // O maneja el error como creas conveniente
+  }
 
   return (
     <div className="list">
