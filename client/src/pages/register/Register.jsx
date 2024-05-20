@@ -67,7 +67,7 @@ export default function Register() {
             ref={passwordRef}
           />
           <button className="loginButton" onClick={handleFinish}>
-            Registrarme
+            Registrarme 
           </button>
           <span>
             <b>Ya tengo una cuenta</b>
