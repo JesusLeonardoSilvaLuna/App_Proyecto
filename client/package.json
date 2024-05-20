@@ -43,5 +43,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "app-proyecto-api.vercel.app"
+  "proxy": "https://app-proyecto-api.vercel.app/"
 }
