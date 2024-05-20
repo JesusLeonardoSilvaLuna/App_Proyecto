@@ -18,7 +18,7 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact path="/">
-          {user ? <Series /> : <Redirect to="/login" />}
+          {user ? <Home /> : <Redirect to="/login" />}
         </Route>
         <Route path="/register">
           {!user ? <Register /> : <Redirect to="/" />}
