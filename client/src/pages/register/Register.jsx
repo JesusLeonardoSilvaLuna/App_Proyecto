@@ -18,7 +18,7 @@ export default function Register() {
     e.preventDefault();
     
     try {
-      const res = await axios.post("https://app-proyecto.vercel.app/login", {
+      const res = await axios.post("https://app-proyecto.vercel.app/Api/login", {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       });
