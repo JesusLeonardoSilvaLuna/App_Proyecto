@@ -20,30 +20,12 @@ mongoose
     console.error(err);
   });
 
-app.use(cors({
-    origin: 'https://app-proyecto.vercel.app', // URL de tu frontend en Vercel
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-    allowedHeaders: 'Content-Type,Authorization'
-  }));
+app.use(cors());
 
 app.use(express.json());
 
-app.use("/Api/auth", authRoute);
-app.use("/Api/users", userRoute);
-
-app.post('/Api/login', (req, res) => {
-  const { email, password } = req.body;
-  // Aquí va la lógica de autenticación
-  res.status(200).json({ message: 'Login successful' });
-});
-
-app.post('/Api/auth/register', (req, res) => {
-  // Aquí iría la lógica para registrar un usuario
-  const { email, username, password } = req.body;
-  // Suponiendo que la lógica de registro es exitosa
-  res.status(201).send('Registro exitoso');
-});
+app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
