@@ -22,7 +22,7 @@ export default function Register() {
     const enteredUsername = usernameRef.current.value;
   
     try {
-      await axios.post("http://localhost:8800/api/auth/register", {
+      await axios.post("https://app-proyecto-api.vercel.app/api/auth/register", {
         email: enteredEmail,
         username: enteredUsername,
         password: enteredPassword
