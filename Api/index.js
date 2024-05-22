@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
 const cors = require("cors");
+const PORT = process.env.PORT || 8800;
 
 dotenv.config();
 
@@ -25,6 +26,12 @@ app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 
+app.post('/api/login', (req, res) => {
+  const { email, password } = req.body;
+  // Aquí va la lógica de autenticación
+  res.status(200).json({ message: 'Login successful' });
+});
+
 app.post('/api/auth/register', (req, res) => {
   // Aquí iría la lógica para registrar un usuario
   const { email, username, password } = req.body;
@@ -32,6 +39,6 @@ app.post('/api/auth/register', (req, res) => {
   res.status(201).send('Registro exitoso');
 });
 
-app.listen(8800, () => {
-  console.log("Backend server is running!");
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
