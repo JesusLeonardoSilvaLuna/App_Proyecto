@@ -8,7 +8,7 @@
     ],
     "routes": [
       { "src": "/login", "dest": "/Api/index.js" },
-      { "src": "/api/(.*)", "dest": "/Api/index.js" }
+      { "src": "/Api/(.*)", "dest": "/Api/index.js" }
     ]
 }
   
