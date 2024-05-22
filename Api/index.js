@@ -25,6 +25,13 @@ app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 
+app.post('/api/auth/register', (req, res) => {
+  // Aquí iría la lógica para registrar un usuario
+  const { email, username, password } = req.body;
+  // Suponiendo que la lógica de registro es exitosa
+  res.status(201).send('Registro exitoso');
+});
+
 app.listen(8800, () => {
   console.log("Backend server is running!");
 });
