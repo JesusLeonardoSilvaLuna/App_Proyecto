@@ -6,7 +6,7 @@ import "./navbar.scss";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../authContext/AuthContext";
 import { logout } from "../../authContext/AuthActions";
-import { InfoOutlined } from "@material-ui/icons";
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -43,7 +43,7 @@ const Navbar = () => {
         </div>
         <div className="buttons">
           <button className="more">
-            <InfoOutlined />
+            <InfoOutlinedIcon />
             <span>Acerca de nosotros</span>
           </button>
         </div>
