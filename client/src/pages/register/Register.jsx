@@ -8,7 +8,7 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const navigate = useHistory();
+  const history = useHistory();
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -18,13 +18,12 @@ export default function Register() {
     e.preventDefault();
     
     try {
-      const res = await axios.post("https://app-proyecto.vercel.app/Api/login", {
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
+      await axios.post("https://app-proyecto.vercel.app/api/login", {
+        email: enteredEmail,
+        username: enteredUsername,
+        password: enteredPassword
       });
-      console.log("Login successful:", res.data);
-      // Redirigir al usuario a la página deseada después del login exitoso
-      navigate("/dashboard");
+      history.push("/login");
     } catch (err) {
       if (err.response) {
         console.error("Error en la solicitud:", err.response.data);
@@ -36,7 +35,6 @@ export default function Register() {
     }
   };
   
-
   return (
     <div className="login">
       <div className="top">
