@@ -5,6 +5,14 @@ const dotenv = require("dotenv");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
 const cors = require("cors");
+const categoriasRouter = require('./routes/categorias');
+const ciclistasRouter = require('./routes/ciclista');
+const eventoRouter = require('./routes/eventos');
+const juezRouter = require('./routes/juez');
+const organizadorRouter = require('./routes/organizador');
+const rutaRouter = require('./routes/rutas');
+const equipoRouter = require('./routes/equipo');
+const noticiasRouter = require('./routes/noticias');
 
 dotenv.config();
 
@@ -25,6 +33,14 @@ app.use(express.json());
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
+app.use('/api/categoria', categoriasRouter);
+app.use('/api/ciclista', ciclistasRouter);
+app.use('/api/juez', juezRouter);
+app.use('/api/evento', eventoRouter);
+app.use('/api/organizador', organizadorRouter);
+app.use('/api/ruta', rutaRouter);
+app.use('/api/equipo', equipoRouter);
+app.use('/api/news', noticiasRouter);
 
 app.listen("https://app-proyecto-api.vercel.app/", () => {
   console.log(`Server is running`);
