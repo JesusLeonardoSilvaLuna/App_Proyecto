@@ -1,0 +1,25 @@
+.featured {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .cards-container {
+    display: flex;
+    justify-content: space-around; /* Para distribuir las tarjetas uniformemente */
+  }
+  
+  .card {
+    flex: 0 0 calc(33.33% - 70px); /* Para que haya 3 tarjetas por fila y un espacio entre ellas */
+    margin-bottom: 5px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Ajusta los estilos de la imagen dentro de la tarjeta */
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
