@@ -8,22 +8,26 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const history = useHistory();
+  const navigate = useHistory();
 
   const emailRef = useRef();
   const passwordRef = useRef();
   const usernameRef = useRef();
 
-  const handleLogin = async (e) => {
+  const handleFinish = async (e) => {
     e.preventDefault();
-    
+  
+    const enteredEmail = emailRef.current.value;
+    const enteredPassword = passwordRef.current.value;
+    const enteredUsername = usernameRef.current.value;
+  
     try {
-      await axios.post("https://app-proyecto.vercel.app/api/login", {
+      await axios.post("http://localhost:8800/api/auth/register", {
         email: enteredEmail,
         username: enteredUsername,
         password: enteredPassword
       });
-      history.push("/login");
+      navigate("/login");
     } catch (err) {
       if (err.response) {
         console.error("Error en la solicitud:", err.response.data);
