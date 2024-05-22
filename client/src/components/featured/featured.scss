@@ -24,14 +24,21 @@
     }
   }
 
-  #genre{
+  #genre {
     z-index: 2;
   }
 
-  img {
+  .img-container {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: 95%;
+    position: relative;
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   .info {
