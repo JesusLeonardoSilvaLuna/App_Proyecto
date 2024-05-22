@@ -2,12 +2,12 @@
 
 .navbar {
   width: 100%;
-  color: white;
-  font-size: 14px;
+  color: rgb(255, 255, 255);
+  font-size: 16px; // Incrementar el tamaño de la fuente base
   position: fixed;
   top: 0;
   z-index: 999;
-  background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.3) 50%);
+  background: linear-gradient(to top, transparent 2%, rgba(6, 6, 7, 0.186) 1%);
 
   &.scrolled {
     background-color: var(--main-color);
@@ -36,6 +36,7 @@
       span {
         margin-right: 20px;
         cursor: pointer;
+        font-size: 18px; // Incrementar el tamaño de la fuente de los spans
 
         @include tablet {
           display: none;
@@ -56,6 +57,7 @@
       .icon {
         margin: 0px 15px;
         cursor: pointer;
+        font-size: 20px; // Incrementar el tamaño de los íconos
       }
 
       img {
@@ -73,9 +75,30 @@
           border-radius: 5px;
         }
 
+        
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: 10px;
+    cursor: pointer;
+
+
+    &.more {
+      background-color: gray;
+      color: white;
+    }
+
+
         span {
           padding: 10px;
           cursor: pointer;
+          font-size: 18px; // Incrementar el tamaño de la fuente de los spans en el perfil
         }
 
         &:hover {
@@ -88,4 +111,4 @@
       }
     }
   }
-}
+  }}

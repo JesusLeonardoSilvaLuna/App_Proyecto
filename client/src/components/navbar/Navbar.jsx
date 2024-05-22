@@ -1,28 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import { ArrowDropDown, Notifications, Search } from "@material-ui/icons";
+import { useContext, useState } from "react";
 import "./navbar.scss";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../authContext/AuthContext";
 import { logout } from "../../authContext/AuthActions";
-import { ArrowDropDown } from '@mui/icons-material';
-import SearchIcon from '@mui/icons-material/Search';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import { InfoOutlined } from "@material-ui/icons";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { dispatch } = useContext(AuthContext);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.pageXOffset === 0 ? false : true);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
+  window.onscroll = () => {
+    setIsScrolled(window.pageYOffset === 0 ? false : true);
+    return () => (window.onscroll = null);
+  };
   return (
     <div className={isScrolled ? "navbar scrolled" : "navbar"}>
       <div className="container">
@@ -34,30 +25,42 @@ const Navbar = () => {
           <Link to="/" className="link">
             <span>Inicio</span>
           </Link>
-          <Link to="/series" className="link">
+          <Link to="/eventos" className="link">
             <span className="navbarmainLinks">Eventos</span>
           </Link>
-          <Link to="/movies" className="link">
-            <span className="navbarmainLinks">Equipos</span>
+          <Link to="/inscripciones" className="link">
+            <span className="navbarmainLinks">Inscripciones</span>
           </Link>
-          <span>Inscripciones</span>
+          <span></span>
+          <Link to="/ciclistas" className="link">
+          <span>Ciclistas</span>
+          </Link>
+          <span>Equipos</span>
+          <span>Seguimiento</span>
           <span>Resultados</span>
         </div>
-        <div className="right">
-          <SearchIcon className="icon" />
-          <span></span>
-          <NotificationsIcon className="icon" />
+        <div className="buttons">
+          <button className="more">
+            <InfoOutlined />
+            <span>Acerca de nosotros</span>
+          </button>
+        </div>
+        <div className="right" >
+          <Search className="icon" />
+          <span>KID</span>
+          <Notifications className="icon" />
           <img
-            src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/77c02028044361.5636ec274f9ad.jpg"
+            src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
             alt=""
           />
           <div className="profile">
             <ArrowDropDown className="icon" />
             <div className="options">
-              <span>Configuración</span>
-              <span onClick={() => dispatch(logout())}>Cerrar sesión</span>
+              <span>Iniciar Sesion</span>
+              <span onClick={() => dispatch(logout())}>Registrate</span>
             </div>
           </div>
+        
         </div>
       </div>
     </div>
