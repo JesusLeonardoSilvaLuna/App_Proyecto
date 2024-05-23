@@ -27,12 +27,12 @@ const App = () => {
           {!user ? <Register /> : <Redirect to="/" />}
         </Route>
         <Route path="/login">{!user ? <Login /> : <Redirect to="/" />}</Route>
-        <Route path="/eventos" element={<Eventos />} />
-        <Route path="/inscripciones" element={<InscripcionForm />} />
-        <Route path="/ciclistas" element={<Ciclistas />} />
-
+        
         {user && (
           <>
+            <Route path="/eventos" element={<Eventos />} />
+            <Route path="/inscripciones" element={<InscripcionForm />} />
+            <Route path="/ciclistas" element={<Ciclistas />} />
             <Route path="/movies">
               <Home type="movie" />
             </Route>
