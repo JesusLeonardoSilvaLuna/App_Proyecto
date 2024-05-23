@@ -10,7 +10,7 @@ const Eventos = () => {
   useEffect(() => {
     const fetchEventos = async () => {
       try {
-        const response = await axios.get('http://localhost:8800/api/evento/obtener');
+        const response = await axios.get('https://app-proyecto-api.vercel.app/api/evento/obtener');
         setEventos(response.data);
       } catch (error) {
         console.error('Error fetching eventos:', error);
