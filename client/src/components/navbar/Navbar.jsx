@@ -6,7 +6,6 @@ import "./navbar.scss";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../authContext/AuthContext";
 import { logout } from "../../authContext/AuthActions";
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,21 +32,10 @@ const Navbar = () => {
           <Link to="/inscripciones" className="link">
             <span className="navbarmainLinks">Inscripciones</span>
           </Link>
-          <span></span>
-          <Link to="/ciclistas" className="link">
-          <span>Ciclistas</span>
-          </Link>
           <span>Equipos</span>
-          <span>Seguimiento</span>
           <span>Resultados</span>
         </div>
-        <div className="buttons">
-          <button className="more">
-            <InfoOutlinedIcon />
-            <span>Acerca de nosotros</span>
-          </button>
-        </div>
-        <div className="right" >
+        <div className="right">
           <SearchIcon className="icon" />
           <span>KID</span>
           <NotificationsIcon className="icon" />
@@ -58,11 +46,10 @@ const Navbar = () => {
           <div className="profile">
             <ArrowDropDownIcon className="icon" />
             <div className="options">
-              <span>Iniciar Sesion</span>
-              <span onClick={() => dispatch(logout())}>Registrate</span>
+              <span>Settings</span>
+              <span onClick={() => dispatch(logout())}>Logout</span>
             </div>
           </div>
-        
         </div>
       </div>
     </div>
@@ -70,4 +57,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
