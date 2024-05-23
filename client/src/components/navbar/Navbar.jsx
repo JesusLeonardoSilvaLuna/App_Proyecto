@@ -46,8 +46,8 @@ const Navbar = () => {
           <div className="profile">
             <ArrowDropDownIcon className="icon" />
             <div className="options">
-              <span>Settings</span>
-              <span onClick={() => dispatch(logout())}>Logout</span>
+              <span>Configuración</span>
+              <span onClick={() => dispatch(logout())}>Cerrar sesión</span>
             </div>
           </div>
         </div>
