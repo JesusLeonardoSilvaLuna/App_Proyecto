@@ -11,7 +11,7 @@ const Ciclistas = () => {
     // Función asincrónica para obtener los ciclistas
     const fetchCiclistas = async () => {
       try {
-        const response = await axios.get('https://app-proyecto-api.vercel.app/api/ciclista/obtener'); // Hacer la solicitud GET al backend
+        const response = await axios.get("https://app-proyecto-api.vercel.app/api/ciclista/obtener"); // Hacer la solicitud GET al backend
         setCiclistas(response.data); // Establecer los ciclistas en el estado
       } catch (error) {
         console.error('Error al obtener los ciclistas:', error);
