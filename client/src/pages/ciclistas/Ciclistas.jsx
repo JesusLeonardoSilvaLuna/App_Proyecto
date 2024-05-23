@@ -23,7 +23,7 @@ const Ciclistas = () => {
 
   // Estilo para el área destacada
   const featuredStyle = {
-    backgroundImage: url('https://markrossstudio.com/wp/wp-content/uploads/2014/09/MRoss_CPowersRacingB-e1410990826225.jpg'),
+    backgroundImage: 'url("https://markrossstudio.com/wp/wp-content/uploads/2014/09/MRoss_CPowersRacingB-e1410990826225.jpg")',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     borderRadius: '10px',
@@ -53,3 +53,4 @@ const Ciclistas = () => {
 };
 
 export default Ciclistas;
+
