@@ -1,18 +1,13 @@
 import { useRef } from "react";
-import { useState } from "react";
-import { useHistory } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./register.scss";
 
 export default function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const navigate = useHistory();
-
   const emailRef = useRef();
   const passwordRef = useRef();
   const usernameRef = useRef();
+  const navigate = useNavigate();
 
   const handleFinish = async (e) => {
     e.preventDefault();
