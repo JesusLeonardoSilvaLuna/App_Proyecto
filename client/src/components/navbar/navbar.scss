@@ -14,19 +14,20 @@
   }
 
   .container {
-    padding: 0px 50px;
+    padding: 0px 10vw; /* Utilizar porcentajes para el padding horizontal */
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 70px;
 
     @include tablet {
-      padding: 0px 20px;
+      padding: 0px 5vw; /* Ajustar el padding para tabletas */
     }
 
     @include mobile {
       flex-direction: column;
       height: auto;
+      padding: 10px 5vw; /* Ajustar el padding para dispositivos móviles */
     }
 
     .left {
@@ -35,7 +36,7 @@
 
       img {
         height: 25px;
-        margin-right: 40px;
+        margin-right: 5vw; /* Utilizar porcentaje para el margen derecho */
 
         @include mobile {
           display: none;
@@ -43,7 +44,7 @@
       }
 
       span {
-        margin-right: 20px;
+        margin-right: 2vw; /* Utilizar porcentaje para el margen derecho */
         cursor: pointer;
 
         @include tablet {
@@ -67,20 +68,25 @@
       }
 
       .icon {
-        margin: 0px 15px;
+        margin: 0px 2vw; /* Utilizar porcentaje para el margen horizontal */
         cursor: pointer;
 
         @include mobile {
-          margin: 0px 10px;
+          margin: 0px 1vw; /* Ajustar el margen para dispositivos móviles */
         }
       }
 
       img {
-        width: 30px;
-        height: 30px;
+        width: 3vw; /* Utilizar porcentaje para el ancho */
+        height: 3vw; /* Utilizar porcentaje para la altura */
         border-radius: 5px;
         object-fit: cover;
         cursor: pointer;
+
+        @include mobile {
+          width: 10vw; /* Ajustar el ancho para dispositivos móviles */
+          height: 10vw; /* Ajustar la altura para dispositivos móviles */
+        }
       }
 
       .profile {
@@ -95,13 +101,13 @@
           top: 40px;
 
           @include mobile {
-            top: 30px;
-            right: -10px;
+            top: 20px; /* Ajustar la posición superior para dispositivos móviles */
+            right: -5vw; /* Utilizar porcentaje para la posición derecha */
           }
         }
 
         span {
-          padding: 10px;
+          padding: 1vw; /* Utilizar porcentaje para el padding */
           cursor: pointer;
         }
 
