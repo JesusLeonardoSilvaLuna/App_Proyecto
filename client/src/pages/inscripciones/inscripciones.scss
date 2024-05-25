@@ -1,109 +1,118 @@
 @import "../../app.scss";
 
 .img-container {
-    width: 100%;
-    height: 100%;
-    position: relative; /* Permite el posicionamiento relativo */
-    background:  url('https://markrossstudio.com/wp/wp-content/uploads/2014/09/MRoss_CPowersRacingB-e1410990826225.jpg');
-    background-size: cover;
-    background-position: center;
-    border-radius: 10px;
-    overflow: hidden; /* Oculta cualquier desbordamiento */
-  }
-  
-  .form-container {
-    width: 800px;
-    margin: 60px;
-    padding: 20px;
-    background-color: rgba(11, 11, 11, 0.8); /* Fondo blanco semitransparente */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
-    float: left;
-    overflow: hidden;
-  }
-  
-  .form-content {
-    width: 100%;
-    
-  }
-  
-  .form-content h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: white;
-  }
-  
-  .form-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-  
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background:  url('https://markrossstudio.com/wp/wp-content/uploads/2014/09/MRoss_CPowersRacingB-e1410990826225.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 60px auto; /* Centra el formulario horizontalmente */
+  padding: 20px;
+  background-color: rgba(11, 11, 11, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.form-content {
+  width: 100%;
+}
+
+.form-content h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  width: calc(50% - 10px);
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: white;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: #333;
+  background-color: rgba(255, 255, 255, 0.4);
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.form-group select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23555"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/><path fill="none" d="M0 0h24v24H0V0z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 18px;
+}
+
+.form-group button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-group button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.form-group button:active {
+  background-color: #004085;
+  transform: translateY(1px);
+}
+
+// Media queries para hacer que el formulario sea responsivo
+@include tablet {
   .form-group {
-    width: calc(50% - 10px);
-    margin-bottom: 20px;
+    width: 100%; /* En pantallas más pequeñas, el ancho de los grupos de formulario es del 100% */
   }
-  
-  .form-group label {
-    font-weight: bold;
-    color: white;
-    display: block;
-    margin-bottom: 5px;
+}
+
+@include mobile {
+  .form-container {
+    padding: 10px; /* Reducir el espacio alrededor del formulario en dispositivos móviles */
   }
-  
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    box-sizing: border-box;
-    font-size: 16px;
-    color: #333;
-    background-color: rgba(255, 255, 255, 0.4);
-    transition: border-color 0.3s ease;
-  }
-  
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    border-color: #007bff;
-    outline: none;
-  }
-  
-  .form-group select {
-    appearance: none;
-    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23555"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/><path fill="none" d="M0 0h24v24H0V0z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 18px;
-  }
-  
-  .form-group button {
-    width: 100%;
-    padding: 12px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    font-size: 18px;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .form-group button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-  }
-  
-  .form-group button:active {
-    background-color: #004085;
-    transform: translateY(1px);
-  }
-  
+}
