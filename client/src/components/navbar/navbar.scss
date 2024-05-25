@@ -7,7 +7,7 @@
   position: fixed;
   top: 0;
   z-index: 999;
-  background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.3) 50%);
+  background: linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 0.3) 50%);
 
   &.scrolled {
     background-color: var(--main-color);
@@ -19,6 +19,15 @@
     align-items: center;
     justify-content: space-between;
     height: 70px;
+
+    @include tablet {
+      padding: 0px 20px;
+    }
+
+    @include mobile {
+      flex-direction: column;
+      height: auto;
+    }
 
     .left {
       display: flex;
@@ -53,9 +62,17 @@
       display: flex;
       align-items: center;
 
+      @include mobile {
+        margin-top: 10px;
+      }
+
       .icon {
         margin: 0px 15px;
         cursor: pointer;
+
+        @include mobile {
+          margin: 0px 10px;
+        }
       }
 
       img {
@@ -67,10 +84,20 @@
       }
 
       .profile {
+        position: relative;
+
         .options {
           display: none;
           background-color: var(--main-color);
           border-radius: 5px;
+          position: absolute;
+          right: 0;
+          top: 40px;
+
+          @include mobile {
+            top: 30px;
+            right: -10px;
+          }
         }
 
         span {
@@ -82,7 +109,6 @@
           .options {
             display: flex;
             flex-direction: column;
-            position: absolute;
           }
         }
       }
