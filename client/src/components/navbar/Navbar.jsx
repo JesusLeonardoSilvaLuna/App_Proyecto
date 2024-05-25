@@ -32,6 +32,9 @@ const Navbar = () => {
           <Link to="/inscripciones" className="link">
             <span className="navbarmainLinks">Inscripciones</span>
           </Link>
+          <Link to="/ciclistas" className="link">
+            <span className="navbarmainLinks">Ciclistas</span>
+          </Link>
           <span>Equipos</span>
           <span>Resultados</span>
         </div>
