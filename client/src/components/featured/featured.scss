@@ -1,123 +1,89 @@
 @import "../../app.scss";
 
-.featured {
-  height: 100%; /* Cambiar la altura a 100% para ocupar todo el espacio disponible */
-  position: relative;
+.navbar {
+  width: 100%;
+  color: white;
+  font-size: 14px;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.3) 50%);
 
-  .category {
-    position: absolute;
-    top: 5%; /* Cambiar a porcentaje para que se ajuste mejor en diferentes tamaños de pantalla */
-    left: 5%; /* Cambiar a porcentaje */
-    font-size: 3vw; /* Utilizar vw para el tamaño de fuente */
-    font-weight: 500;
-    color: white;
+  &.scrolled {
+    background-color: var(--main-color);
+  }
+
+  .container {
+    padding: 0px 50px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    height: 70px;
 
-    @include tablet {
-      font-size: 4vw; /* Ajustar el tamaño de fuente para tabletas */
-      top: 3%; /* Ajustar la posición superior */
-      left: 3%; /* Ajustar la posición izquierda */
-    }
-
-    @include mobile {
-      font-size: 5vw; /* Ajustar el tamaño de fuente para dispositivos móviles */
-      top: 2%; /* Ajustar la posición superior */
-      left: 2%; /* Ajustar la posición izquierda */
-    }
-
-    select {
-      cursor: pointer;
-      background-color: var(--main-color);
-      border: 1px solid white;
-      color: white;
-      margin-left: 2%; /* Cambiar a porcentaje */
-      padding: 1%; /* Cambiar a porcentaje */
-
-      @include mobile {
-        margin-left: 1%; /* Ajustar el margen izquierdo para dispositivos móviles */
-        padding: 0.5%; /* Ajustar el relleno para dispositivos móviles */
-      }
-    }
-  }
-
-  #genre {
-    z-index: 2;
-  }
-
-  .img-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  .info {
-    width: 45%; /* Utilizar porcentaje en lugar de un valor fijo */
-    position: absolute;
-    left: 5%; /* Utilizar porcentaje */
-    bottom: 5%; /* Utilizar porcentaje */
-    color: white;
-    display: flex;
-    flex-direction: column;
-
-    @include tablet {
-      width: 60%; /* Ajustar el ancho para tabletas */
-      left: 3%; /* Ajustar la posición izquierda para tabletas */
-      bottom: 3%; /* Ajustar la posición inferior para tabletas */
-    }
-
-    @include mobile {
-      width: 90%; /* Ajustar el ancho para dispositivos móviles */
-      left: 2%; /* Ajustar la posición izquierda para dispositivos móviles */
-      bottom: 2%; /* Ajustar la posición inferior para dispositivos móviles */
-    }
-
-    img {
-      width: 70%; /* Utilizar porcentaje para adaptar el tamaño de la imagen */
-      margin-top: 5%; /* Utilizar porcentaje para el margen superior */
-
-      @include tablet {
-        width: 80%; /* Ajustar el tamaño de la imagen para tabletas */
-      }
-
-      @include mobile {
-        width: 90%; /* Ajustar el tamaño de la imagen para dispositivos móviles */
-        margin-top: 3%; /* Ajustar el margen superior para dispositivos móviles */
-      }
-    }
-
-    .desc {
-      margin: 3% 0; /* Utilizar porcentaje para el margen superior e inferior */
-      width: 100%; /* Utilizar ancho del 100% para asegurar que el texto se ajuste correctamente */
-
-      @include mobile {
-        margin: 5% 0; /* Ajustar el margen superior e inferior para dispositivos móviles */
-      }
-    }
-
-    .buttons {
+    .left {
       display: flex;
-      flex-wrap: wrap;
+      align-items: center;
 
-      button {
-        padding: 2% 4%; /* Utilizar porcentaje para el relleno */
-        border-radius: 5px;
-        font-size: 2vw; /* Utilizar vw para el tamaño de fuente */
-        margin-right: 2%; /* Utilizar porcentaje para el margen derecho */
-        margin-top: 2%; /* Utilizar porcentaje para el margen superior */
+      img {
+        height: 25px;
+        margin-right: 40px;
 
         @include mobile {
-          padding: 1% 2%; /* Ajustar el relleno para dispositivos móviles */
-          font-size: 3vw; /* Ajustar el tamaño de la fuente para dispositivos móviles */
-          margin-right: 1%; /* Ajustar el margen derecho para dispositivos móviles */
-          margin-top: 1%; /* Ajustar el margen superior para dispositivos móviles */
+          display: none;
+        }
+      }
+
+      span {
+        margin-right: 20px;
+        cursor: pointer;
+
+        @include tablet {
+          display: none;
+        }
+
+        &.navbarmainLinks {
+          @include tablet {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+
+      .icon {
+        margin: 0px 15px;
+        cursor: pointer;
+      }
+
+      img {
+        width: 30px;
+        height: 30px;
+        border-radius: 5px;
+        object-fit: cover;
+        cursor: pointer;
+      }
+
+      .profile {
+        .options {
+          display: none;
+          background-color: var(--main-color);
+          border-radius: 5px;
+        }
+
+        span {
+          padding: 10px;
+          cursor: pointer;
+        }
+
+        &:hover {
+          .options {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+          }
         }
       }
     }
