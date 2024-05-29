@@ -11,7 +11,6 @@ import { AuthContext } from "./authContext/AuthContext";
 import GesNoticias from "./pages/Organizador/GestionarNoticias";
 import Gestionar from "./pages/Organizador/GestionarEventos"
 import GestionarIns from "./pages/Organizador/GesInscripciones"
-import DetalleEvento from "./pages/eventos/DetallesEvento";
 import "./app.scss";
 
 const App = () => {
@@ -23,7 +22,6 @@ const App = () => {
         <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
         <Route path="/register" element={!user ? <Register /> : <Navigate to="/" />} />
         <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
-        <Route path="/eventos/:id" element={<DetalleEvento />} />
         <Route path="/eventos" element={<Eventos />} /> 
         <Route path="/inscripciones" element={<InscripcionForm />} />
         <Route path="/ciclistas" element={<Ciclistas />} />
