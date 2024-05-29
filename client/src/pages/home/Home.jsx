@@ -1,31 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from "../../components/navbar/Navbar";
 import Featured from "../../components/featured/Featured";
-import Card from "../../components/card/Card"; // Importa el componente Card
+import Card from "../../components/card/Card";
+import axios from 'axios'; 
 import "./home.scss";
 
 const Home = ({ type }) => {
+  const [noticias, setNoticias] = useState([]);
+
+  useEffect(() => {
+    const fetchNoticias = async () => {
+      try {
+        const response = await axios.get('https://app-proyecto.vercel.app/api/news/obtener'); 
+        setNoticias(response.data);
+      } catch (error) {
+        console.error('Error al obtener noticias:', error);
+      }
+    };
+
+    fetchNoticias();
+  }, []);
 
   return (
     <div className="home">
       <Navbar />
       <Featured /> 
       <div className="card-container">
-      <Card
-        title="Nuevo Record"
-        src="https://th.bing.com/th/id/OIP.8Jvx3lRnMfMKAJ1vM7nW7AHaE7?rs=1&pid=ImgDetMain"
-        description="Pablo Garcia rompe record"
-      />
-      <Card
-        title="Regreso"
-        src="https://wallpaperbat.com/img/446702-cycling-wallpaper.jpg"
-        description="Miguel Hernandez regresa al mundo del ciclismo"
-      />
-      <Card
-        title="Nueva promesa"
-        src="https://www.gentlemansgazette.com/wp-content/uploads/2015/06/Cycling-shorts-for-men-840x559.jpg"
-        description="El novato Cristian Perez mostro un gran potencial"
-      />
+        {/* Mapea sobre las noticias para renderizar cada una */}
+        {noticias.map((noticia, index) => (
+          <Card
+            key={index}
+            title={noticia.title}
+            src={noticia.image}
+            description={noticia.content}
+          />
+        ))}
       </div>
     </div>
   );

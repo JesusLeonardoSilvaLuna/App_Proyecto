@@ -8,6 +8,10 @@ import Eventos from './pages/eventos/Eventos';
 import Ciclistas from './pages/ciclistas/Ciclistas'; 
 import { useContext } from "react";
 import { AuthContext } from "./authContext/AuthContext";
+import GesNoticias from "./pages/Organizador/GestionarNoticias";
+import Gestionar from "./pages/Organizador/GestionarEventos"
+import GestionarIns from "./pages/Organizador/GesInscripciones"
+import DetalleEvento from "./pages/eventos/DetallesEvento";
 import "./app.scss";
 
 const App = () => {
@@ -19,15 +23,15 @@ const App = () => {
         <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
         <Route path="/register" element={!user ? <Register /> : <Navigate to="/" />} />
         <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
-        <Route path="/eventos" element={<Eventos />} />
+        <Route path="/eventos/:id" element={<DetalleEvento />} />
+        <Route path="/eventos" element={<Eventos />} /> 
         <Route path="/inscripciones" element={<InscripcionForm />} />
         <Route path="/ciclistas" element={<Ciclistas />} />
+        <Route path="/organizador" element={<GesNoticias />} />
+        <Route path="/gestionar" element={<Gestionar />} />
+        <Route path="/gestionarIns" element={<GestionarIns />} />
         {user && (
-          <>
-            <Route path="/movies" element={<Home type="movie" />} />
-            <Route path="/series" element={<Home type="series" />} />
-            <Route path="/watch" element={<Watch />} />
-          </>
+          <Route path="/watch" element={<Watch />} />
         )}
       </Routes>
     </Router>

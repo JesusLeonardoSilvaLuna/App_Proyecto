@@ -1,19 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const News = require('../models/Noticias');
+const upload = require('../multer-config'); // Asegúrate de que el camino sea correcto
 
-router.post('/crear', async (req, res) => {
-    try {
-      const noticias = req.body; // Array de noticias
-      const noticiasCreadas = await News.create(noticias);
-      res.status(201).json(noticiasCreadas);
-    } catch (err) {
-      res.status(400).json({ message: err.message });
-    }
-  });
-  
+// Crear una noticia
+router.post('/crear', upload.single('image'), async (req, res) => {
+  try {
+    const { title, content } = req.body;
+    const news = new News({
+      title,
+      content,
+      image: req.file ? req.file.path : null,
+    });
+    await news.save();
+    res.status(201).json(news);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
 // Obtener todas las noticias
-router.get('/', async (req, res) => {
+router.get('/obtener', async (req, res) => {
   try {
     const news = await News.find();
     res.json(news);
@@ -23,7 +30,7 @@ router.get('/', async (req, res) => {
 });
 
 // Obtener una noticia por ID
-router.get('/:id', async (req, res) => {
+router.get('/obtener/:id', async (req, res) => {
   try {
     const news = await News.findById(req.params.id);
     res.json(news);
@@ -33,10 +40,14 @@ router.get('/:id', async (req, res) => {
 });
 
 // Actualizar una noticia por ID
-router.put('/actualizar/:id', async (req, res) => {
+router.put('/actualizar/:id', upload.single('image'), async (req, res) => {
   try {
-    const { title, content, image } = req.body;
-    await News.findByIdAndUpdate(req.params.id, { title, content, image });
+    const { title, content } = req.body;
+    const updatedData = { title, content };
+    if (req.file) {
+      updatedData.image = req.file.path;
+    }
+    await News.findByIdAndUpdate(req.params.id, updatedData, { new: true });
     res.json({ message: 'Noticia actualizada' });
   } catch (err) {
     res.status(500).json({ message: err.message });

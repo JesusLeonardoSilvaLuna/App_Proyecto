@@ -10,7 +10,7 @@ const newsSchema = new mongoose.Schema({
     required: true
   },
   image: {
-    type: String // Ruta de la imagen almacenada en el servidor o en la nube
+    type: String 
   },
   date: {
     type: Date,

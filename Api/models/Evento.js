@@ -14,22 +14,17 @@ const EventoSchema = new mongoose.Schema({
     required: true
   },
   imagen: {
-    type: String, // Puedes almacenar la URL de la imagen o la ruta del archivo en el servidor
-    required: true
+    type: String, 
+    required: false
   },
   categorias: [{
-    nombre: String,
-    distancia: String,
-    descripcion: String
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Categoria'
   }],
   rutas: [{
-    nombre: String,
-    distancia: Number, // Distancia en kilómetros
-    puntosDeControl: [{
-      latitud: Number,
-      longitud: Number
-    }]
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Ruta'
   }]
 });
 
-module.exports = mongoose.model("Evento", EventoSchema)
+module.exports = mongoose.model("Evento", EventoSchema);
