@@ -40,9 +40,9 @@ app.use("/api/eventos", eventoRoute);
 app.use("/api/juez", juezRoute);
 app.use("/api/organizador", organizadorRoute);
 app.use("/api/ruta", rutaRoute);
-app.use('/api/news', noticiasRouter);
-app.use('/api/inscripciones', inscripcionesRouter);
-app.use('/uploads', express.static('uploads'));
+app.use("/api/news", noticiasRouter);
+app.use("/api/inscripciones", inscripcionesRouter);
+app.use("/uploads", express.static('uploads'));
 
 app.listen("https://app-proyecto-api.vercel.app/", () => {
   console.log(`Server is running`);
