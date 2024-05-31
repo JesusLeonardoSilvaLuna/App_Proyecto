@@ -224,7 +224,7 @@ const handleSubmit = async (e) => {
       formData.append('categorias', JSON.stringify(selectedCategorias.map(cat => cat.value)));
       formData.append('rutas', JSON.stringify(selectedRutas.map(ruta => ruta.value)));
   
-      const response = await axios.post('https://app-proyecto.vercel.app/api/evento/crear', formData, {
+      const response = await axios.post('https://app-proyecto-api.vercel.app/api/evento/crear', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
