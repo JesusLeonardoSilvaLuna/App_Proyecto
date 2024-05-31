@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './gestionar.scss';
 import Menu from "../../components/MenuOrganizador/Menu";
-import { FaTrashAlt } from 'react-icons/fa'; 
+import { FaTrashAlt } from 'react-icons/fa';
 
 const GestionarNoticias = () => {
   const [newsList, setNewsList] = useState([]);
   const [selectedNews, setSelectedNews] = useState(null);
   const [isCreating, setIsCreating] = useState(false);
+  const [loading, setLoading] = useState(true); // Estado para manejar la carga
+  const [error, setError] = useState(null); // Estado para manejar errores
 
   const fetchNews = async () => {
     try {
@@ -15,6 +17,9 @@ const GestionarNoticias = () => {
       setNewsList(response.data);
     } catch (error) {
       console.error('Error fetching news:', error);
+      setError(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -36,35 +41,47 @@ const GestionarNoticias = () => {
     fetchNews(); // Refresh news list
   };
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error fetching news: {error.message}</div>;
+  }
+
   return (
     <div>
-        <Menu />
-    <div className="gestionar-noticias">
-      <h1>Gestionar Noticias</h1>
-      <div className="button-container">
-        <button onClick={handleCreate} className="new-news-button">Nueva Noticia</button>
+      <Menu />
+      <div className="gestionar-noticias">
+        <h1>Gestionar Noticias</h1>
+        <div className="button-container">
+          <button onClick={handleCreate} className="new-news-button">Nueva Noticia</button>
+        </div>
+        <ul className="news-list">
+          {Array.isArray(newsList) && newsList.length > 0 ? (
+            newsList.map(news => (
+              <li key={news._id} className="news-item" onClick={() => handleSelectNews(news)}>
+                <span>{news.title} - {new Date(news.date).toLocaleDateString()}</span>
+              </li>
+            ))
+          ) : (
+            <div>No hay noticias disponibles</div>
+          )}
+        </ul>
+
+        {selectedNews && (
+          <NewsModal
+            news={selectedNews}
+            onClose={handleCloseModal}
+          />
+        )}
+
+        {isCreating && (
+          <CreateNewsModal
+            onClose={handleCloseModal}
+          />
+        )}
       </div>
-      <ul className="news-list">
-        {newsList.map(news => (
-          <li key={news._id} className="news-item" onClick={() => handleSelectNews(news)}>
-            <span>{news.title} - {new Date(news.date).toLocaleDateString()}</span>
-          </li>
-        ))}
-      </ul>
-
-      {selectedNews && (
-        <NewsModal
-          news={selectedNews}
-          onClose={handleCloseModal}
-        />
-      )}
-
-      {isCreating && (
-        <CreateNewsModal
-          onClose={handleCloseModal}
-        />
-      )}
-    </div>
     </div>
   );
 };
@@ -132,7 +149,8 @@ const CreateNewsModal = ({ onClose }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
-const handleCreate = async () => {
+
+  const handleCreate = async () => {
     try {
       const formData = new FormData();
       formData.append('title', title);
