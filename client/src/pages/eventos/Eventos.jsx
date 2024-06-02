@@ -38,7 +38,7 @@ const Eventos = () => {
 
   const handleCardClick = async (id) => {
     try {
-      const response = await axios.get(`https://app-proyecto-api.vercel.app/eventos/obtener/${id}`);
+      const response = await axios.get(`https://app-proyecto-api.vercel.app/api/eventos/obtener/${id}`);
       setSelectedEvento(response.data);
       setShowModal(true);
     } catch (error) {
@@ -51,8 +51,7 @@ const Eventos = () => {
     setSelectedEvento(null);
   };
 
-
-   // Estilo para el área destacada 
+  // Estilo para el área destacada 
   const featuredStyle = { 
     backgroundImage: 'url("https://markrossstudio.com/wp/wp-content/uploads/2014/09/MRoss_CPowersRacingB-e1410990826225.jpg")', 
     backgroundSize: 'cover', 
@@ -61,7 +60,6 @@ const Eventos = () => {
     height: '300px', // Ajusta la altura según sea necesario 
     marginBottom: '20px', // Espacio entre el área destacada y las tarjetas 
   }; 
- 
 
   return (
     <div>
