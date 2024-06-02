@@ -13,7 +13,7 @@ const GestionarNoticias = () => {
 
   const fetchNews = async () => {
     try {
-      const response = await axios.get('https://app-proyecto.vercel.app/api/news/obtener');
+      const response = await axios.get('https://app-proyecto-api.vercel.app/api/news/obtener');
       setNewsList(response.data);
     } catch (error) {
       console.error('Error fetching news:', error);
@@ -99,7 +99,7 @@ const NewsModal = ({ news, onClose }) => {
       if (selectedFile) {
         formData.append('image', selectedFile);
       }
-      await axios.put(`https://app-proyecto.vercel.app/api/news/actualizar/${news._id}`, formData, {
+      await axios.put(`https://app-proyecto-api.vercel.app/api/news/actualizar/${news._id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -112,7 +112,7 @@ const NewsModal = ({ news, onClose }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`https://app-proyecto.vercel.app/api/news/eliminar/${news._id}`);
+      await axios.delete(`https://app-proyecto-api.vercel.app/api/news/eliminar/${news._id}`);
       onClose();
     } catch (error) {
       console.error('Error deleting news:', error);
@@ -158,7 +158,7 @@ const CreateNewsModal = ({ onClose }) => {
       if (selectedFile) {
         formData.append('image', selectedFile);
       }
-      await axios.post('https://app-proyecto.vercel.app/api/news/crear', formData, {
+      await axios.post('https://app-proyecto-api.vercel.app/api/news/crear', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

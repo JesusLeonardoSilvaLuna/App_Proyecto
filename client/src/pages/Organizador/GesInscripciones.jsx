@@ -11,7 +11,7 @@ const GestionarInscripciones = () => {
   const [searchTerm, setSearchTerm] = useState(''); // Término de búsqueda
 
   useEffect(() => {
-    fetch('https://app-proyecto.vercel.app/api/inscripciones/obtener')
+    fetch('https://app-proyecto-api.vercel.app/api/inscripciones/obtener')
       .then(response => response.json())
       .then(data => setInscriptions(data))
       .catch(error => console.error('Error al obtener las inscripciones:', error));
@@ -19,7 +19,7 @@ const GestionarInscripciones = () => {
 
   const updateInscriptionStatus = (inscriptionId, status) => {
     console.log('Enviando solicitud PATCH al servidor...');
-    fetch(`https://app-proyecto.vercel.app/api/inscripciones/actualizar/${inscriptionId}`, {
+    fetch(`https://app-proyecto-api.vercel.app/api/inscripciones/actualizar/${inscriptionId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -57,7 +57,7 @@ const GestionarInscripciones = () => {
     const newCyclist = { nombre, apellidos, edad, genero, direccion, correo, numero, seguroSocial, contactoEmergencia };
     
     // Enviar la solicitud para crear un ciclista
-    fetch('https://app-proyecto.vercel.app/api/ciclista/crear', {
+    fetch('https://app-proyecto-api.vercel.app/api/ciclista/crear', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
