@@ -8,23 +8,36 @@ router.post('/crear', upload.single('imagen'), async (req, res) => {
   try {
     console.log('Request body:', req.body); // Debugging
     console.log('File info:', req.file); // Debugging
+
     const { nombre, fecha, lugar, categorias, rutas } = req.body;
+
+    if (!nombre || !fecha || !lugar || !categorias || !rutas) {
+      return res.status(400).json({ message: 'Todos los campos son requeridos' });
+    }
+
+    const parsedCategorias = JSON.parse(categorias);
+    const parsedRutas = JSON.parse(rutas);
+
+    if (!Array.isArray(parsedCategorias) || !Array.isArray(parsedRutas)) {
+      return res.status(400).json({ message: 'Categorias y rutas deben ser arreglos' });
+    }
+
     const evento = new Evento({
       nombre,
       fecha,
       lugar,
-      imagen: req.file.path, // Asegúrate de que el campo coincide con el esquema del modelo Evento
-      categorias: JSON.parse(categorias),
-      rutas: JSON.parse(rutas),
+      imagen: req.file.path,
+      categorias: parsedCategorias,
+      rutas: parsedRutas,
     });
+
     await evento.save();
     res.status(201).json(evento);
   } catch (error) {
     console.error('Error al crear el evento:', error);
-    res.status(500).json({ message: 'Error al crear el evento', error });
+    res.status(500).json({ message: 'Error al crear el evento', error: error.message });
   }
 });
-
 
 
 // Ruta para obtener todos los eventos con categorías y rutas pobladas
