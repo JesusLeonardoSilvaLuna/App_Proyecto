@@ -13,7 +13,7 @@ const GestionarEventos = () => {
   const [isCreating, setIsCreating] = useState(false); // Estado para controlar el modal de creación de eventos
 
   const fetchEvents = () => {
-    fetch('https://app-proyecto.vercel.app/api/evento/obtener')
+    fetch('https://app-proyecto.vercel.app/api/eventos/obtener')
       .then(response => response.json())
       .then(data => setEvents(data))
       .catch(error => console.error('Error al obtener los eventos:', error));
@@ -22,12 +22,12 @@ const GestionarEventos = () => {
   useEffect(() => {
     fetchEvents();
 
-    fetch('https://app-proyecto.vercel.app/api/categoria/obtener')
+    fetch('https://app-proyecto.vercel.app/api/categorias/obtener')
       .then(response => response.json())
       .then(data => setCategories(data))
       .catch(error => console.error('Error al obtener las categorías:', error));
 
-    fetch('https://app-proyecto.vercel.app/api/ruta/obtener')
+    fetch('https://app-proyecto.vercel.app/api/rutas/obtener')
       .then(response => response.json())
       .then(data => setRoutes(data))
       .catch(error => console.error('Error al obtener las rutas:', error));
@@ -42,7 +42,7 @@ const GestionarEventos = () => {
   };
 
   const confirmDelete = () => {
-    fetch(`https://app-proyecto.vercel.app/api/evento/eliminar/${deletingEvent._id}`, { method: 'DELETE' })
+    fetch(`https://app-proyecto.vercel.app/api/eventos/eliminar/${deletingEvent._id}`, { method: 'DELETE' })
       .then(response => response.json())
       .then(() => {
         setEvents(events.filter(event => event._id !== deletingEvent._id));
@@ -52,7 +52,7 @@ const GestionarEventos = () => {
   };
 
   const saveEdit = (formData) => {
-    axios.patch(`https://app-proyecto.vercel.app/api/evento/actualizar/${editingEvent._id}`, formData, {
+    axios.patch(`https://app-proyecto.vercel.app/api/eventos/actualizar/${editingEvent._id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -224,7 +224,7 @@ const handleSubmit = async (e) => {
       formData.append('categorias', JSON.stringify(selectedCategorias.map(cat => cat.value)));
       formData.append('rutas', JSON.stringify(selectedRutas.map(ruta => ruta.value)));
   
-      const response = await axios.post('https://app-proyecto-api.vercel.app/api/evento/crear', formData, {
+      const response = await axios.post('https://app-proyecto-api.vercel.app/api/eventos/crear', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
