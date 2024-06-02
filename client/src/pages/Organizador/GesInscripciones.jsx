@@ -19,7 +19,7 @@ const GestionarInscripciones = () => {
 
   const updateInscriptionStatus = (inscriptionId, status) => {
     console.log('Enviando solicitud PATCH al servidor...');
-    fetch(`https://app-proyecto-api.vercel.app/inscripciones/actualizar/${inscriptionId}`, {
+    fetch(`https://app-proyecto-api.vercel.app/api/inscripciones/actualizar/${inscriptionId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -42,6 +42,7 @@ const GestionarInscripciones = () => {
       })
       .catch(error => console.error('Error al actualizar la inscripción:', error));
   };
+  
 
   const handleInscriptionSelect = (inscription) => {
     setSelectedInscription(inscription);
@@ -86,8 +87,7 @@ const GestionarInscripciones = () => {
     inscription.nombre.toLowerCase().includes(searchTerm.toLowerCase()) &&
     (filterState === '' || inscription.estado === filterState)
   );
-
-  return (
+return (
     <div>
       <Menu />
       <div className="gestionar-inscripciones">
@@ -107,19 +107,18 @@ const GestionarInscripciones = () => {
             <option value="Pendiente">Pendientes</option>
             <option value="Aceptada">Aceptadas</option>
             <option value="Rechazada">Rechazadas</option>
-            <option value="Cancelada">Canceladas</option>
           </select>
         </div>
         <ul className="inscription-list">
-          {filteredInscriptions.map(inscription => (
+        {filteredInscriptions.map(inscription => (
             <li 
-              key={inscription._id} 
-              className={`inscription-item ${inscription.estado === 'Pendiente' ? 'pendiente' : inscription.estado === 'Aceptada' ? 'aceptada' : inscription.estado === 'Rechazada' ? 'rechazada' : inscription.estado === 'Cancelada' ? 'cancelada' : ''}`}
-              onClick={() => handleInscriptionSelect(inscription)}
+            key={inscription._id} 
+            className={`inscription-item ${inscription.estado === 'Pendiente' ? 'pendiente' : inscription.estado === 'Aceptada' ? 'aceptada' : inscription.estado === 'Rechazada' ? 'rechazada' : inscription.estado === 'Cancelada' ? 'cancelada' : ''}`}
+            onClick={() => handleInscriptionSelect(inscription)}
             >
-              {inscription.nombre}
+            {inscription.nombre}
             </li>
-          ))}
+        ))}
         </ul>
         {/* Detalles de la inscripción */}
         {selectedInscription && (
