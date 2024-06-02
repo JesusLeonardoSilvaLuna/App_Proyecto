@@ -65,7 +65,7 @@ const GestionarInscripciones = () => {
       body: JSON.stringify(newCyclist)
     })
       .then(response => response.json())
-      .then(createdCyclist => {
+      .then(_createdCyclist => {
         // Actualizar el estado de la inscripción a 'Aceptada' en la base de datos
         updateInscriptionStatus(selectedInscription._id, 'Aceptada');
         // Mostrar mensaje de confirmación
