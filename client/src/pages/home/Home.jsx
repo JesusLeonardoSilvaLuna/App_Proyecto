@@ -13,7 +13,7 @@ const Home = ({ type }) => {
   useEffect(() => {
     const fetchNoticias = async () => {
       try {
-        const response = await axios.get('https://app-proyecto.vercel.app/api/news/obtener'); 
+        const response = await axios.get('https://app-proyecto-api.vercel.app/api/news/obtener'); 
         setNoticias(response.data);
       } catch (error) {
         console.error('Error al obtener noticias:', error);
