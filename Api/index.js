@@ -34,12 +34,12 @@ app.use(express.json());
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
-app.use("/api/categoria", categoriasRoute);
+app.use("/api/categorias", categoriasRoute);
 app.use("/api/ciclista", ciclistaRoute);
-app.use("/api/evento", eventoRoute);
+app.use("/api/eventos", eventoRoute);
 app.use("/api/juez", juezRoute);
 app.use("/api/organizador", organizadorRoute);
-app.use("/api/ruta", rutaRoute);
+app.use("/api/rutas", rutaRoute);
 app.use("/api/news", noticiasRouter);
 app.use("/api/inscripciones", inscripcionesRouter);
 app.use("/uploads", express.static('uploads'));
