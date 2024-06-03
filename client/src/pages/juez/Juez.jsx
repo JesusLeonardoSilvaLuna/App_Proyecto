@@ -15,7 +15,7 @@ const Juez = () => {
 
   const fetchCiclistas = async () => {
     try {
-      const response = await axios.get('https://app-proyecto-api.vercel.app/api/ciclistas/obtener');
+      const response = await axios.get('https://app-proyecto-api.vercel.app/api/ciclista/obtener');
       setCiclistas(response.data);
     } catch (error) {
       console.error('Error fetching ciclistas:', error);
