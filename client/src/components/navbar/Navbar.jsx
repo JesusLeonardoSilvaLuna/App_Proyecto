@@ -38,6 +38,9 @@ const Navbar = () => {
           <Link to="/organizador" className="link">
             <span className="navbarmainLinks">Organizador</span>
           </Link>
+          <Link to="/juez" className="link">
+            <span className="navbarmainLinks">Puntaje</span>
+          </Link>
           <span>Equipos</span>
           <span>Resultados</span>
         </div>

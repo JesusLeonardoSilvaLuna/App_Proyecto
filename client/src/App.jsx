@@ -12,6 +12,7 @@ import GesNoticias from "./pages/Organizador/GestionarNoticias";
 import Gestionar from "./pages/Organizador/GestionarEventos"
 import GestionarIns from "./pages/Organizador/GesInscripciones"
 import "./app.scss";
+import Juez from './pages/juez/Juez';
 
 const App = () => {
   const { user } = useContext(AuthContext);
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/organizador" element={<GesNoticias />} />
         <Route path="/gestionar" element={<Gestionar />} />
         <Route path="/gestionarIns" element={<GestionarIns />} />
+        <Route path="/juez" element={<Juez />} />
         {user && (
           <Route path="/watch" element={<Watch />} />
         )}
