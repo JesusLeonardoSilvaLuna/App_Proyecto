@@ -33,7 +33,7 @@ const InscripcionForm = () => {
           numero: contactoEmergenciaNumero
         }
       };
-      const response = await axios.post('https://app-proyecto-api.vercel.app/api/ciclista/crear', nuevoCiclista);
+      const response = await axios.post('https://app-proyecto-api.vercel.app/api/incripciones/crear', nuevoCiclista);
       console.log('Ciclista creado:', response.data);
       // Reiniciar el formulario o mostrar un mensaje de éxito según sea necesario
     } catch (error) {
