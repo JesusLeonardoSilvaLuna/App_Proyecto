@@ -28,7 +28,7 @@ export default function Featured({ type, setGenre }) {
         />
       </div>
       <div className="info">
-        <div className="img-container">
+        <div className="img-container-log">
           <img src={content.imageLinks[currentImageIndex]} alt="" />
         </div>
       </div>
