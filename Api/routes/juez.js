@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Juez = require('../models/Juez');
 const Ciclista = require('../models/Ciclista');
+const Puntaje = require('../models/Juez')
 
 // Crear un nuevo juez
 router.post('/crearJuez', async (req, res) => {
@@ -46,6 +47,16 @@ router.post('/juez/:juezId/puntuar', async (req, res) => {
     res.status(201).json(juez);
   } catch (err) {
     res.status(400).json({ message: err.message });
+  }
+});
+
+// Ruta para obtener los ciclistas calificados
+router.get('/calificados', async (req, res) => {
+  try {
+    const calificados = await Puntaje.find().populate('ciclistaId').populate('juezId');
+    res.json(calificados);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 

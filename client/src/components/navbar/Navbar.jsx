@@ -42,7 +42,9 @@ const Navbar = () => {
             <span className="navbarmainLinks">Puntaje</span>
           </Link>
           <span>Equipos</span>
-          <span>Resultados</span>
+          <Link to="/juez" className="link">
+            <span className="navbarmainLinks">Resultados</span>
+          </Link>
         </div>
         <div className="right">
           <SearchIcon className="icon" />
