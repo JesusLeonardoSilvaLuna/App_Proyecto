@@ -40,6 +40,9 @@ const Navbar = () => {
           <Link to="/organizador" className="link">
             <span className="navbarmainLinks">Organizador</span>
           </Link>
+          <Link to="/juez" className="link">
+            <span className="navbarmainLinks">Juez</span>
+          </Link>
         </div>
         <div className="right">
           <SearchIcon className="icon" />
