@@ -20,11 +20,11 @@ export default function Featured({ type, setGenre }) {
 
 
   return (
-    <div className="featured">
+    <div className="featured"> 
       <div className="img-container">
         <img
           src="https://markrossstudio.com/wp/wp-content/uploads/2014/09/MRoss_CPowersRacingB-e1410990826225.jpg"
-          alt=""
+          alt="" 
         />
       </div>
       <div className="info">

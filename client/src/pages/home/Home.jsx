@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Navbar from "../../components/navbar/Navbar";
 import Featured from "../../components/featured/Featured";
 import Card from "../../components/card/Card";
@@ -7,8 +7,8 @@ import "./home.scss";
 
 const Home = ({ type }) => {
   const [noticias, setNoticias] = useState([]);
-  const [loading, setLoading] = useState(true); // Estado para manejar la carga
-  const [error, setError] = useState(null); // Estado para manejar errores
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const intervalRef = useRef(null);
 
   useEffect(() => {
     const fetchNoticias = async () => {
@@ -17,41 +17,69 @@ const Home = ({ type }) => {
         setNoticias(response.data);
       } catch (error) {
         console.error('Error al obtener noticias:', error);
-        setError(error);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchNoticias();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const startAutoSlide = useCallback(() => {
+    intervalRef.current = setInterval(() => {
+      setCurrentIndex(prevIndex => {
+        if (prevIndex === noticias.length) {
+          return 0;
+        }
+        return prevIndex + 1;
+      });
+    }, 6000);
+  }, [noticias.length]);
 
-  if (error) {
-    return <div>Error al cargar noticias</div>;
-  }
+  const stopAutoSlide = useCallback(() => {
+    clearInterval(intervalRef.current);
+  }, []);
+
+  useEffect(() => {
+    if (noticias.length > 0) {
+      startAutoSlide();
+    }
+
+    return () => stopAutoSlide();
+  }, [noticias, startAutoSlide, stopAutoSlide]);
+
+  const goToPrevious = () => {
+    stopAutoSlide();
+    setCurrentIndex(prevIndex => {
+      if (prevIndex === 0) {
+        return noticias.length - 1;
+      }
+      return prevIndex - 1;
+    });
+    startAutoSlide();
+  };
+
+  const goToNext = () => {
+    stopAutoSlide();
+    setCurrentIndex(prevIndex => (prevIndex + 1) % noticias.length);
+    startAutoSlide();
+  };
 
   return (
     <div className="home">
       <Navbar />
       <Featured /> 
       <div className="card-container">
-        {/* Verifica si noticias es un arreglo antes de mapear */}
-        {Array.isArray(noticias) && noticias.length > 0 ? (
-          noticias.map((noticia, index) => (
+        <button className="arrow arrow-left" onClick={goToPrevious}>&#8249;</button>
+        <div className="cards" style={{ transform:` translateX(-${currentIndex * (100 / noticias.length)}%)` }}>
+          {noticias.concat(noticias).map((noticia, index) => (
             <Card
               key={index}
               title={noticia.title}
               src={noticia.image}
               description={noticia.content}
             />
-          ))
-        ) : (
-          <div>No hay noticias disponibles</div>
-        )}
+          ))}
+        </div>
+        <button className="arrow arrow-right" onClick={goToNext}>&#8250;</button>
       </div>
     </div>
   );
