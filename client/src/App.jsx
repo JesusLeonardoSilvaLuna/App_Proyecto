@@ -32,6 +32,7 @@ const App = () => {
         <Route path="/gestionarIns" element={<GestionarIns />} />
         <Route path="/juez" element={<Juez />} />
         <Route path="/equipos" element={<Equipos />} />
+        <Route path="/" element={user ? (user.role === 'Ciclista' ? <Home /> : <Navigate to="/organizador" />) : <Navigate to="/login" />} />
         {user && (
           <Route path="/watch" element={<Watch />} />
         )}
