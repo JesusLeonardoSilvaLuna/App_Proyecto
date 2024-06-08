@@ -34,7 +34,6 @@ const App = () => {
           user.role === 'Ciclista' ? (
             <>
               <Route path="/" element={<Home />} />
-              <Route path="/resultados" element={<Resultados />} /> 
               <Route path="/perfil" element={<Perfil />} /> 
               <Route path="/watch" element={<Watch />} />
               <Route path="/log" element={<Log />} /> 
