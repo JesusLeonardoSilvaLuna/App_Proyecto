@@ -3,17 +3,20 @@ import Home from "./pages/home/Home";
 import Register from "./pages/register/Register";
 import Watch from "./pages/watch/Watch";
 import Login from "./pages/login/Login";
+import Log from "./pages/login/Login";
 import InscripcionForm from "./pages/inscripciones/Inscripciones";
-import Eventos from './pages/eventos/Eventos'; 
+import Eventos from './pages/eventos/Eventos';
+import Equipos from './pages/equipos/Equipo';  
 import Ciclistas from './pages/ciclistas/Ciclistas'; 
 import { useContext } from "react";
 import { AuthContext } from "./authContext/AuthContext";
 import GesNoticias from "./pages/Organizador/GestionarNoticias";
-import Gestionar from "./pages/Organizador/GestionarEventos"
-import GestionarIns from "./pages/Organizador/GesInscripciones"
+import Gestionar from "./pages/Organizador/GestionarEventos";
+import GestionarIns from "./pages/Organizador/GesInscripciones";
+import Perfil from './pages/perfil/Perfil'; 
+import Resultados from './pages/resultados /Resultados'; 
+
 import "./app.scss";
-import Juez from './pages/juez/Juez';
-import Equipos from './pages/equipos/Equipo';
 
 const App = () => {
   const { user } = useContext(AuthContext);
@@ -21,20 +24,35 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
-        <Route path="/register" element={!user ? <Register /> : <Navigate to="/" />} />
         <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
+        <Route path="/register" element={!user ? <Register /> : <Navigate to="/" />} />
+        <Route path="/log" element={<Log />} /> 
         <Route path="/eventos" element={<Eventos />} /> 
-        <Route path="/inscripciones" element={<InscripcionForm />} />
-        <Route path="/ciclistas" element={<Ciclistas />} />
-        <Route path="/organizador" element={<GesNoticias />} />
-        <Route path="/gestionar" element={<Gestionar />} />
-        <Route path="/gestionarIns" element={<GestionarIns />} />
-        <Route path="/juez" element={<Juez />} />
-        <Route path="/equipos" element={<Equipos />} />
-        <Route path="/" element={user ? (user.role === 'Ciclista' ? <Home /> : <Navigate to="/organizador" />) : <Navigate to="/login" />} />
-        {user && (
-          <Route path="/watch" element={<Watch />} />
+        <Route path="/equipos" element={<Equipos />} /> 
+
+        {user ? (
+          user.role === 'Ciclista' ? (
+            <>
+              <Route path="/" element={<Home />} />
+              <Route path="/resultados" element={<Resultados />} /> 
+              <Route path="/perfil" element={<Perfil />} /> 
+              <Route path="/watch" element={<Watch />} />
+              <Route path="/log" element={<Log />} /> 
+              <Route path="/eventos" element={<Eventos />} /> 
+              <Route path="/equipos" element={<Equipos />} /> 
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<Navigate to="/organizador" />} />
+              <Route path="/organizador" element={<GesNoticias />} />
+              <Route path="/inscripciones" element={<InscripcionForm />} />
+              <Route path="/ciclistas" element={<Ciclistas />} />
+              <Route path="/gestionar" element={<Gestionar />} />
+              <Route path="/gestionarIns" element={<GestionarIns />} />
+            </>
+          )
+        ) : (
+          <Navigate to="/login" />
         )}
       </Routes>
     </Router>
