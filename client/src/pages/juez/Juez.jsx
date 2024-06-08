@@ -28,7 +28,7 @@ const Juez = () => {
 
   const handlePuntuar = async () => {
     try {
-      const response = await axios.post(`https://app-proyecto-api.vercel.app/api/juez/${juezId}/puntuar`, {
+      const response = await axios.post(`https://app-proyecto-api.vercel.app/api/juez/:juezId/puntuar`, {
         ciclistaId: selectedCiclista._id,
         puntaje,
         comentario
