@@ -1,17 +1,19 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Define el esquema de puntaje
-const ScoreSchema = new Schema({
+// Define el esquema de ciclista
+const PuntajeSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, required: true, ref: 'User' }, // Referencia al ID del usuario
-    gameId: { type: Schema.Types.ObjectId, required: true, ref: 'Game' }, // Referencia al ID del juego
-    score: { type: Number, required: true }, // Puntaje obtenido
-    date: { type: Date, default: Date.now }, // Fecha del puntaje
-    level: { type: Number, required: true }, // Nivel alcanzado
-    duration: { type: Number, required: true }, // Duración de la partida en segundos
+    eventId: { type: Schema.Types.ObjectId, required: true, ref: 'Event' }, // Referencia al ID del evento
+    time: { type: Number, required: true }, // Tiempo en segundos
+    distance: { type: Number, required: true }, // Distancia recorrida en kilómetros
+    averageSpeed: { type: Number, required: true }, // Velocidad media en km/h
+    date: { type: Date, default: Date.now }, // Fecha del evento
+    position: { type: Number }, // Posición en la carrera
+    elevationGain: { type: Number }, // Ganancia de elevación en metros
 });
 
 // Crea el modelo a partir del esquema
-const Score = mongoose.model('Score', ScoreSchema);
+const Puntaje = mongoose.model('Puntaje', PuntajeSchema);
 
-module.exports = Score;
+module.exports = Puntaje;

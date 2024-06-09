@@ -24,6 +24,10 @@ const EventoSchema = new mongoose.Schema({
   rutas: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Ruta'
+  }],
+  ciclistas: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Ciclista'
   }]
 });
 

@@ -64,6 +64,29 @@ router.get('/obtener/:id', async (req, res) => {
   }
 });
 
+// Ruta para obtener todos los eventos con ciclistas inscritos
+router.get('/obtener', async (req, res) => {
+  try {
+    const eventos = await Evento.find().populate('ciclistas');
+    res.json(eventos);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Ruta para obtener un evento por ID con categorías y rutas pobladas
+router.get('/obtener/:id', async (req, res) => {
+  try {
+    const evento = await Evento.findById(req.params.id).populate('ciclistas');
+    if (!evento) {
+      return res.status(404).json({ message: 'Evento no encontrado' });
+    }
+    res.json(evento);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 // Ruta para actualizar un evento por ID
 router.patch('/actualizar/:id', upload.single('imagen'), async (req, res) => {
   try {
@@ -103,5 +126,7 @@ router.delete('/eliminar/:id', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+
 
 module.exports = router;
