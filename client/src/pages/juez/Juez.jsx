@@ -16,7 +16,7 @@ const Juez = () => {
 
   const fetchEventos = async () => {
     try {
-      const response = await axios.get('https://app-proyecto-api.vercel.app/api/evento/obtener');
+      const response = await axios.get('https://app-proyecto-api.vercel.app/api/eventos/obtener');
       setEventos(response.data);
     } catch (error) {
       console.error('Error fetching eventos:', error);
