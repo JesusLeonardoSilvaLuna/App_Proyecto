@@ -7,10 +7,15 @@ import { AuthContext } from "../../authContext/AuthContext";
 import { logout } from "../../authContext/AuthActions";
 import './menu.scss';
 
-const Menu= () => {
+const Menu = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { dispatch } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    console.log("Dispatching logout");
+    dispatch(logout());
+  };
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
@@ -53,10 +58,9 @@ const Menu= () => {
             <ArrowDropDownIcon className="icon" />
             <div className={isMenuOpen ? "options open" : "options"}>
               <Link to="/perfil" className="link">
-              <span>Ir a mi perfil</span>
+                <span>Ir a mi perfil</span>
               </Link>
-              <span>Iniciar Sesion</span>
-              <span onClick={() => {console.log('Dispatching logout'); dispatch(logout());}}>Registrate</span>
+              <span onClick={handleLogout}>Registrate</span>
             </div>
           </div>
         </div>
