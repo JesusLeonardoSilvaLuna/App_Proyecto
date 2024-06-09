@@ -14,6 +14,7 @@ import GesNoticias from "./pages/Organizador/GestionarNoticias";
 import Gestionar from "./pages/Organizador/GestionarEventos";
 import GestionarIns from "./pages/Organizador/GesInscripciones";
 import Perfil from './pages/perfil/Perfil'; 
+import Juez from './pages/juez/Juez';
 
 
 import "./app.scss";
