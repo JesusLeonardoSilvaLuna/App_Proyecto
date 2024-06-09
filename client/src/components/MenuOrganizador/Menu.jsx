@@ -60,7 +60,7 @@ const Menu = () => {
               <Link to="/perfil" className="link">
                 <span>Ir a mi perfil</span>
               </Link>
-              <span onClick={handleLogout}>Registrate</span>
+              <span onClick={handleLogout}>Cerrar sesión</span>
             </div>
           </div>
         </div>
