@@ -56,7 +56,7 @@ const Menu= () => {
               <span>Ir a mi perfil</span>
               </Link>
               <span>Iniciar Sesion</span>
-              <span onClick={() => dispatch(logout())}>Registrate</span>
+              <span onClick={() => {console.log('Dispatching logout'); dispatch(logout());}}>Registrate</span>
             </div>
           </div>
         </div>
