@@ -45,6 +45,9 @@ const Menu = () => {
           <Link to="/" className="link">
             <span className="navbarmainLinks">Inicio</span>
           </Link>
+          <Link to="/juez" className="link">
+            <span className="navbarmainLinks">Juez</span>
+          </Link>
         </div>
         <div className="right">
           <SearchIcon className="icon" />
