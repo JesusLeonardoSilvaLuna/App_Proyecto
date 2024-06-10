@@ -4,26 +4,16 @@
 }
 
 .cards-container {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-
-.slider {
   display: flex;
-}
-
-.cards {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Para distribuir las tarjetas uniformemente */
 }
 
 .card {
-  flex: 0 0 calc(33.33% - 60px);
+  flex: 0 0 calc(33.33% - 60px); /* Ajuste el espacio para un espacio adecuado entre tarjetas */
   margin: 15px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.2s; /* Añade una transición suave */
 }
@@ -86,8 +76,8 @@
   cursor: pointer;
 }
 
-.imagen img {
-  max-width: 80%;
+.evento-detalle .imagen img {
+  max-width: 100%;
   border-radius: 10px;
 }
 
@@ -108,24 +98,4 @@
 
 .button:hover {
   background-color: #0056b3;
-}
-
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-  color: #333;
-  background: rgba(95, 95, 95, 0.7);
-  border: none;
-  cursor: pointer;
-  z-index: 10;
-}
-
-.arrow-left {
-  left: 0;
-}
-
-.arrow-right {
-  right: 0;
 }
