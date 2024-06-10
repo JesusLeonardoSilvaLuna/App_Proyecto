@@ -15,7 +15,7 @@ const Juez = () => {
 
   const fetchEventos = async () => {
     try {
-      const response = await axios.get('https://app-proyecto-api.vercel.app/api/eventos/obtener');
+      const response = await axios.get('https://app-proyecto-api.vercel.app/api/puntaje/crear');
       setEventos(response.data);
     } catch (error) {
       console.error('Error fetching eventos:', error);
@@ -33,7 +33,7 @@ const Juez = () => {
 
   const handlePuntuar = async () => {
     try {
-      await axios.post(`https://app-proyecto-api.vercel.app/api/puntaje/crear`, {
+      await axios.post(`https://app-proyecto-api.vercel.app/api/puntaje//ciclista/:ciclistaId/evento/:eventoId`, {
         ciclistaId: selectedCiclista._id,
         eventoId: selectedEvento._id,
         tiempo: puntaje.tiempo,
