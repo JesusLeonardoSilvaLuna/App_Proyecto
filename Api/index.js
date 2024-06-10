@@ -13,7 +13,7 @@ const organizadorRoute = require("./routes/organizador");
 const rutaRoute = require("./routes/rutas");
 const noticiasRouter = require('./routes/noticias');
 const inscripcionesRouter = require('./routes/inscripciones')
-
+const puntajeRouter = require("./routes/puntaje")
 
 
 dotenv.config();
@@ -42,7 +42,7 @@ app.use("/api/organizador", organizadorRoute);
 app.use("/api/rutas", rutaRoute);
 app.use("/api/news", noticiasRouter);
 app.use("/api/inscripciones", inscripcionesRouter);
-app.use('/api/puntaje', puntajeRoutes);
+app.use('/api/puntaje', puntajeRouter);
 app.use("/uploads", express.static('uploads'));
 
 app.listen("https://app-proyecto-api.vercel.app/", () => {
