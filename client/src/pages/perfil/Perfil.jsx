@@ -178,7 +178,7 @@ const res = await axios.put(`http://localhost:8800/api/users/update-images/${use
               />
             )}
             <div className="profile" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              <ArrowDropDown className="icon" />
+              <ArrowDropDownIcon className="icon" />
               <div className={isMenuOpen ? "options open" : "options"}>
                 <span>Crear equipo</span>
                 <span onClick={() => dispatch(logout())}>Cerrar Sesion</span>
