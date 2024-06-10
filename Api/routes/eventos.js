@@ -41,7 +41,7 @@ router.post('/crear', upload.single('imagen'), async (req, res) => {
 
 
 // Ruta para obtener todos los eventos con categorías y rutas pobladas
-router.get('/obtenerEventos', async (req, res) => {
+router.get('/obtener', async (req, res) => {
   try {
     const eventos = await Evento.find().populate('categorias').populate('rutas');
     res.json(eventos);
@@ -52,7 +52,7 @@ router.get('/obtenerEventos', async (req, res) => {
 
 
 // Ruta para obtener un evento por ID con categorías y rutas pobladas
-router.get('/obtenerEventos/:id', async (req, res) => {
+router.get('/obtener/:id', async (req, res) => {
   try {
     const evento = await Evento.findById(req.params.id).populate('categorias').populate('rutas');
     if (!evento) {
@@ -65,7 +65,7 @@ router.get('/obtenerEventos/:id', async (req, res) => {
 });
 
 // Ruta para obtener todos los eventos con ciclistas inscritos
-router.get('/obtener', async (req, res) => {
+router.get('/obtenerEventos', async (req, res) => {
   try {
     const eventos = await Evento.find().populate('ciclistas');
     res.json(eventos);
@@ -75,7 +75,7 @@ router.get('/obtener', async (req, res) => {
 });
 
 // Ruta para obtener un evento por ID con categorías y rutas pobladas
-router.get('/obtener/:id', async (req, res) => {
+router.get('/obtenerEventos/:id', async (req, res) => {
   try {
     const evento = await Evento.findById(req.params.id).populate('ciclistas');
     if (!evento) {
