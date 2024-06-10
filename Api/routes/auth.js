@@ -55,9 +55,8 @@ router.post("/login", async (req, res) => {
 
 // GOOGLE AUTH
 router.get("/google", passport.authenticate("google", {
-    scope: ["profile", "email"],
-  })
-);
+  scope: ["profile", "email"],
+}));
 
 // Ruta de retorno de inicio de sesión con Google
 router.get("/google/callback",
@@ -67,7 +66,6 @@ router.get("/google/callback",
     res.redirect("/");
   }
 );
-
 
 // Ruta para registrar un usuario con Google
 router.get("/google/register", passport.authenticate("google", {
@@ -92,6 +90,5 @@ router.get("/google/register/callback",
     }
   }
 );
-
 
 module.exports = router;
