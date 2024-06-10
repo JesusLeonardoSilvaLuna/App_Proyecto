@@ -1,8 +1,8 @@
-import { useState, useContext, useEffect } from "react";
-import { GoogleLogin, googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { useState, useContext } from "react";
 import { login, loginWithGoogle } from "../../authContext/apiCalls";
 import { AuthContext } from "../../authContext/AuthContext";
 import { useNavigate, Link } from "react-router-dom"; 
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import "./login.scss";
 
 const Login = () => {
@@ -11,12 +11,6 @@ const Login = () => {
   const [error, setError] = useState(null);
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate(); 
-  const [isNewUser, setIsNewUser] = useState(false); // Nuevo estado para verificar si es un usuario nuevo
-  
-  useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    setIsNewUser(!userId); // Si no hay un userId, significa que es un usuario nuevo
-  }, []); // Verificar si el usuario es nuevo al cargar el componente
 
   const responseGoogle = async (response) => {
     try {
@@ -54,67 +48,57 @@ const Login = () => {
         navigate('/organizador'); // Redireccionar a la página de inicio para organizadores
       }
   
-      // Almacenar el userId y el token en localStorage
-      localStorage.setItem('userId', userData._id);
-      localStorage.setItem('accessToken', userData.accessToken);
+      // Almacenar el userId en localStorage
+      localStorage.setItem('userId', userData.userId);
     } catch (err) {
       setError("Error al iniciar sesión. Por favor, verifique sus credenciales e inténtelo de nuevo.");
       console.error("Error al iniciar sesión:", err);
     }
   };
-
+  
   return (
-    <div className="login">
-      <div className="top">
-        <div className="wrapper">
-          <h1>ByCicling</h1>
+    <GoogleOAuthProvider clientId="TU_ID_DE_CLIENTE_DE_GOOGLE">
+      <div className="login">
+        <div className="top">
+          <div className="wrapper">
+            <h1>ByCicling</h1>
+          </div>
+        </div>
+        <div className="container">
+          <form>
+            <h1>Iniciar Sesión</h1>
+            <GoogleLogin
+              onSuccess={responseGoogle}
+              onError={() => {
+                setError("Error al iniciar sesión con Google. Por favor, inténtelo de nuevo.");
+              }}
+            />
+            <input
+              type="email"
+              placeholder="Correo electrónico"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button className="loginButton" onClick={handleLogin}>
+              Iniciar sesión
+            </button>
+            {error && <p className="errorMessage">{error}</p>}
+            <span>
+              No tienes una cuenta? <b><Link to="/register">Regístrate ahora.</Link></b>
+            </span>
+            <small>
+              <b>Acerca de</b>.
+            </small>
+          </form>
         </div>
       </div>
-      <div className="container">
-        <form>
-          <h1>Iniciar Sesión</h1>
-          {isNewUser ? ( // Verificar si es un usuario nuevo
-            <Link to="/completar">
-              <button className="loginButton">
-                Completar registro
-              </button>
-            </Link>
-          ) : (
-            <>
-              <GoogleLogin
-                onSuccess={responseGoogle}
-                onError={() => {
-                  setError("Error al iniciar sesión con Google. Por favor, inténtelo de nuevo.");
-                  console.error("Login Failed");
-                }}
-              />
-              <input
-                type="email"
-                placeholder="Correo electrónico"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <input
-                type="password"
-                placeholder="Contraseña"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <button className="loginButton" onClick={handleLogin}>
-                Iniciar sesión
-              </button>
-              {error && <p className="errorMessage">{error}</p>}
-              <span>
-                No tienes una cuenta? <b><Link to="/register">Regístrate ahora.</Link></b>
-              </span>
-              <small>
-                <b>Acerca de</b>.
-              </small>
-            </>
-          )}
-        </form>
-      </div>
-    </div>
+    </GoogleOAuthProvider>
   );
 };
 
