@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { GoogleLogin } from "react-oauth/google";
+import { GoogleLogin, googleLogout, useGoogleLogin } from '@react-oauth/google';
 import { login, loginWithGoogle } from "../../authContext/apiCalls";
 import { AuthContext } from "../../authContext/AuthContext";
 import { useNavigate, Link } from "react-router-dom"; 
@@ -20,9 +20,9 @@ const Login = () => {
 
   const responseGoogle = async (response) => {
     try {
-      if (response.tokenId) {
+      if (response.credential) {
         setError(null);
-        await loginWithGoogle(response.tokenId, dispatch);
+        await loginWithGoogle(response.credential, dispatch);
         navigate('/');
       } else {
         setError("Error al iniciar sesión con Google. Por favor, inténtelo de nuevo.");
@@ -62,7 +62,8 @@ const Login = () => {
       console.error("Error al iniciar sesión:", err);
     }
   };
-return (
+
+  return (
     <div className="login">
       <div className="top">
         <div className="wrapper">
@@ -81,11 +82,11 @@ return (
           ) : (
             <>
               <GoogleLogin
-                clientId="817589480367-cu9l2a8dbqfm78gla3ttf8540cnlmh0e.apps.googleusercontent.com"
-                buttonText="Iniciar sesión con Google"
                 onSuccess={responseGoogle}
-                onFailure={responseGoogle}
-                cookiePolicy={'single_host_origin'}
+                onError={() => {
+                  setError("Error al iniciar sesión con Google. Por favor, inténtelo de nuevo.");
+                  console.error("Login Failed");
+                }}
               />
               <input
                 type="email"
