@@ -44,7 +44,7 @@ const Perfil = () => {
 
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`http://localhost:8800/api/users/find/${userId}`, {
+        const res = await axios.get(`https://app-proyecto-api.vercel.app/api/users/find/${userId}`, {
           headers: {
             'Authorization': 'Bearer ' + token
           },
@@ -57,7 +57,7 @@ const Perfil = () => {
 
     const fetchEvents = async () => {
       try {
-        const res = await axios.get(`http://localhost:8800/api/evento/obtener`, {
+        const res = await axios.get(`https://app-proyecto-api.vercel.app/api/evento/obtener`, {
           headers: {
             'Authorization': 'Bearer ' + token
           },
@@ -90,7 +90,7 @@ const Perfil = () => {
         console.error('No userId found in localStorage');
         return;
       }
-const res = await axios.put(`http://localhost:8800/api/users/update-images/${userId}`, formData, {
+const res = await axios.put(`https://app-proyecto-api.vercel.app/api/users/update-images/${userId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': 'Bearer ' + token
@@ -117,7 +117,7 @@ const res = await axios.put(`http://localhost:8800/api/users/update-images/${use
         return;
       }
 
-      const res = await axios.put(`http://localhost:8800/api/users/update-images/${userId}`, formData, {
+      const res = await axios.put(`https://app-proyecto-api.vercel.app/api/users/update-images/${userId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': 'Bearer ' + token
