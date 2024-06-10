@@ -65,7 +65,7 @@ const GestionarEventos = () => {
   };
 
   return (
-    <div>
+    <div className='BG'>
       <Menu />
       <div className="gestionar-eventos">
         <h1>Gestionar Eventos</h1>
