@@ -25,13 +25,12 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        
+        <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
         <Route path="/register" element={!user ? <Register /> : <Navigate to="/" />} />
         <Route path="/log" element={<Log />} /> 
         <Route path="/eventos" element={<Eventos />} /> 
         <Route path="/equipos" element={<Equipos />} />
-        <Route path="/login" element={<Login />} />
-
+        
         {user ? (
           <>
             {user.role === 'Ciclista' && (
