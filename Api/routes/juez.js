@@ -1,31 +1,63 @@
 const express = require('express');
 const router = express.Router();
-const Juez = require('../models/Juez'); // Asegúrate de que el camino sea correcto
-const { Evento, Ciclista } = require('../models/Evento');
+const Juez = require('../models/Juez');
 
-router.post('/:juezId/puntuar', async (req, res) => {
-  const { juezId } = req.params;
-  const { eventoId, ciclistaId, puntaje, comentario } = req.body;
-
+// Crear un juez
+router.post('/crear', async (req, res) => {
   try {
-    const juez = await Juez.findById(juezId);
+    const juez = await Juez.create(req.body);
+    res.status(201).json(juez);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+// Obtener todos los jueces
+router.get('/obtener', async (req, res) => {
+  try {
+    const jueces = await Juez.find();
+    res.json(jueces);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Obtener un juez por ID
+router.get('/obtener:id', async (req, res) => {
+  try {
+    const juez = await Juez.findById(req.params.id);
     if (!juez) {
       return res.status(404).json({ message: 'Juez no encontrado' });
     }
+    res.json(juez);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
-    const nuevoPuntaje = {
-      evento: eventoId,
-      ciclista: ciclistaId,
-      puntaje,
-      comentario
-    };
+// Actualizar un juez
+router.patch('/actualizar/:id', async (req, res) => {
+  try {
+    const juez = await Juez.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!juez) {
+      return res.status(404).json({ message: 'Juez no encontrado' });
+    }
+    res.json(juez);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
 
-    juez.puntajes.push(nuevoPuntaje);
-    await juez.save();
-
-    res.status(201).json({ message: 'Puntaje otorgado correctamente' });
-  } catch (error) {
-    res.status(500).json({ message: 'Error al otorgar puntaje' });
+// Eliminar un juez
+router.delete('/eliminar/:id', async (req, res) => {
+  try {
+    const juez = await Juez.findByIdAndDelete(req.params.id);
+    if (!juez) {
+      return res.status(404).json({ message: 'Juez no encontrado' });
+    }
+    res.json({ message: 'Juez eliminado' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 

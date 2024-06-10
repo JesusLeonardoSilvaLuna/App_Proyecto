@@ -42,6 +42,7 @@ app.use("/api/organizador", organizadorRoute);
 app.use("/api/rutas", rutaRoute);
 app.use("/api/news", noticiasRouter);
 app.use("/api/inscripciones", inscripcionesRouter);
+app.use('/api/puntaje', puntajeRoutes);
 app.use("/uploads", express.static('uploads'));
 
 app.listen("https://app-proyecto-api.vercel.app/", () => {

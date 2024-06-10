@@ -6,9 +6,8 @@ const Juez = () => {
   const [eventos, setEventos] = useState([]);
   const [selectedEvento, setSelectedEvento] = useState(null);
   const [selectedCiclista, setSelectedCiclista] = useState(null);
-  const [puntaje, setPuntaje] = useState('');
-  const [comentario, setComentario] = useState('');
-  const juezId = 'ID_DEL_JUEZ'; // Reemplaza esto con el ID del juez actual
+  const [puntaje, setPuntaje] = useState({ tiempo: '', distancia: '', posicion: '', elevationGain: '' });
+  const juezId = 'ID_DEL_JUEZ'; // Replace this with the current judge's ID
 
   useEffect(() => {
     fetchEventos();
@@ -16,7 +15,7 @@ const Juez = () => {
 
   const fetchEventos = async () => {
     try {
-      const response = await axios.get('https://app-proyecto-api.vercel.app/api/eventos/obtenerEventos');
+      const response = await axios.get('https://app-proyecto-api.vercel.app/api/eventos/obtener');
       setEventos(response.data);
     } catch (error) {
       console.error('Error fetching eventos:', error);
@@ -34,17 +33,18 @@ const Juez = () => {
 
   const handlePuntuar = async () => {
     try {
-      await axios.post(`https://app-proyecto-api.vercel.app/api/juez/${juezId}/puntuar`, {
-        eventoId: selectedEvento._id,
+      await axios.post(`https://app-proyecto-api.vercel.app/api/puntaje/crear`, {
         ciclistaId: selectedCiclista._id,
-        puntaje,
-        comentario
+        eventoId: selectedEvento._id,
+        tiempo: puntaje.tiempo,
+        distancia: puntaje.distancia,
+        posicion: puntaje.posicion,
+        elevationGain: puntaje.elevationGain,
       });
       alert('Puntaje otorgado correctamente');
       setSelectedEvento(null);
       setSelectedCiclista(null);
-      setPuntaje('');
-      setComentario('');
+      setPuntaje({ tiempo: '', distancia: '', posicion: '', elevationGain: '' });
     } catch (error) {
       console.error('Error al otorgar puntaje:', error);
       alert('Hubo un error al otorgar el puntaje. Por favor, intenta nuevamente.');
@@ -81,14 +81,27 @@ const Juez = () => {
           <h2>Otorgar Puntaje a {selectedCiclista.nombre} {selectedCiclista.apellidos}</h2>
           <input
             type="number"
-            value={puntaje}
-            onChange={(e) => setPuntaje(e.target.value)}
-            placeholder="Puntaje (0-100)"
+            value={puntaje.tiempo}
+            onChange={(e) => setPuntaje({ ...puntaje, tiempo: e.target.value })}
+            placeholder="Tiempo (segundos)"
           />
-          <textarea
-            value={comentario}
-            onChange={(e) => setComentario(e.target.value)}
-            placeholder="Comentario"
+          <input
+            type="number"
+            value={puntaje.distancia}
+            onChange={(e) => setPuntaje({ ...puntaje, distancia: e.target.value })}
+            placeholder="Distancia (kilómetros)"
+          />
+          <input
+            type="number"
+            value={puntaje.posicion}
+            onChange={(e) => setPuntaje({ ...puntaje, posicion: e.target.value })}
+            placeholder="Posición"
+          />
+          <input
+            type="number"
+            value={puntaje.elevationGain}
+            onChange={(e) => setPuntaje({ ...puntaje, elevationGain: e.target.value })}
+            placeholder="Ganancia de elevación (metros)"
           />
           <button onClick={handlePuntuar}>Otorgar Puntaje</button>
         </div>
