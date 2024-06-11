@@ -37,7 +37,7 @@ const Navbar = () => {
         </div>
         <div className="right">
           <SearchIcon className="icon" />
-          <span>KID</span>
+          <span>Monse</span>
           <NotificationsIcon className="icon" />
           <img
             src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
@@ -49,8 +49,7 @@ const Navbar = () => {
               <Link to="/perfil" className="link">
               <span>Ir a mi perfil</span>
               </Link>
-              <span>Iniciar Sesion</span>
-              <span onClick={() => dispatch(logout())}>Registrate</span>
+              <span onClick={() => dispatch(logout())}>Cerrar sesión</span>
             </div>
           </div>
         </div>
