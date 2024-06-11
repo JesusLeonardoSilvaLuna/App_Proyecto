@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { GoogleLogin } from "react-google-login";
+import { GoogleLogin } from "react-oauth/google";
 import { login, loginWithGoogle } from "../../authContext/apiCalls";
 import { AuthContext } from "../../authContext/AuthContext";
 import { useNavigate, Link } from "react-router-dom"; 
