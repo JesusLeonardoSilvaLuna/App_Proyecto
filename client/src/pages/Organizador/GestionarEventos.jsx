@@ -17,21 +17,21 @@ const GestionarEventos = () => {
   const [isCreating, setIsCreating] = useState(false);
 
   const fetchEvents = () => {
-    fetch('https://app-proyecto-api.vercel.app/api/evento/obtener')
+    fetch('https://app-proyecto-api.vercel.app/api/eventos/obtener')
       .then(response => response.json())
       .then(data => setEvents(data))
       .catch(error => console.error('Error al obtener los eventos:', error));
   };
 
   const fetchCategories = () => {
-    fetch('https://app-proyecto-api.vercel.app/api/categoria/obtener')
+    fetch('https://app-proyecto-api.vercel.app/api/categorias/obtener')
       .then(response => response.json())
       .then(data => setCategories(data))
       .catch(error => console.error('Error al obtener las categorías:', error));
   };
 
   const fetchRoutes = () => {
-    fetch('https://app-proyecto-api.vercel.app/api/ruta/obtener')
+    fetch('https://app-proyecto-api.vercel.app/api/rutas/obtener')
       .then(response => response.json())
       .then(data => setRoutes(data))
       .catch(error => console.error('Error al obtener las rutas:', error));
@@ -52,7 +52,7 @@ const GestionarEventos = () => {
   };
 
   const confirmDeleteEvent = () => {
-    fetch(`https://app-proyecto-api.vercel.app/api/evento/eliminar/${deletingEvent._id}`, { method: 'DELETE' })
+    fetch(`https://app-proyecto-api.vercel.app/api/eventos/eliminar/${deletingEvent._id}`, { method: 'DELETE' })
       .then(response => response.json())
       .then(() => {
         setEvents(events.filter(event => event._id !== deletingEvent._id));
@@ -62,7 +62,7 @@ const GestionarEventos = () => {
   };
 
   const saveEditEvent = (formData) => {
-    axios.patch(`https://app-proyecto-api.vercel.app/api/evento/actualizar/${editingEvent._id}`, formData, {
+    axios.patch(`https://app-proyecto-api.vercel.app/api/eventos/actualizar/${editingEvent._id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -83,7 +83,7 @@ const GestionarEventos = () => {
   };
 
   const confirmDeleteCategory = () => {
-    fetch(`https://app-proyecto-api.vercel.app/api/categoria/eliminar/${deletingCategory._id}`, { method: 'DELETE' })
+    fetch(`https://app-proyecto-api.vercel.app/api/categorias/eliminar/${deletingCategory._id}`, { method: 'DELETE' })
       .then(response => response.json())
       .then(() => {
         setCategories(categories.filter(category => category._id !== deletingCategory._id));
@@ -93,7 +93,7 @@ const GestionarEventos = () => {
   };
 
   const saveEditCategory = (categoryData) => {
-    axios.patch(`https://app-proyecto-api.vercel.app/api/categoria/actualizar/${editingCategory._id}`, categoryData)
+    axios.patch(`https://app-proyecto-api.vercel.app/api/categorias/actualizar/${editingCategory._id}`, categoryData)
       .then(() => {
         fetchCategories();
         setEditingCategory(null);
@@ -110,7 +110,7 @@ const GestionarEventos = () => {
   };
 
   const confirmDeleteRoute = () => {
-    fetch(`https://app-proyecto-api.vercel.app/api/ruta/eliminar/${deletingRoute._id}`, { method: 'DELETE' })
+    fetch(`https://app-proyecto-api.vercel.app/api/rutas/eliminar/${deletingRoute._id}`, { method: 'DELETE' })
       .then(response => response.json())
       .then(() => {
         setRoutes(routes.filter(route => route._id !== deletingRoute._id));
@@ -119,7 +119,7 @@ const GestionarEventos = () => {
       .catch(error => console.error('Error al eliminar la ruta:', error));
   };
 const saveEditRoute = (routeData) => {
-    axios.patch(`https://app-proyecto-api.vercel.app/api/ruta/actualizar/${editingRoute._id}`, routeData)
+    axios.patch(`https://app-proyecto-api.vercel.app/api/rutas/actualizar/${editingRoute._id}`, routeData)
       .then(() => {
         fetchRoutes();
         setEditingRoute(null);
@@ -322,7 +322,7 @@ const CreateEventModal = ({ categories, routes, onClose, onEventCreated }) => {
       formData.append('imagen', selectedFile);
     }
 
-    axios.post('https://app-proyecto-api.vercel.app/api/evento/crear', formData, {
+    axios.post('https://app-proyecto-api.vercel.app/api/eventos/crear', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
