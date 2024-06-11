@@ -12,9 +12,9 @@ const juezRoute = require("./routes/juez");
 const organizadorRoute = require("./routes/organizador");
 const rutaRoute = require("./routes/rutas");
 const noticiasRouter = require('./routes/noticias');
-const inscripcionesRouter = require('./routes/inscripciones')
-const puntajeRouter = require("./routes/puntaje")
-
+const inscripcionesRouter = require('./routes/inscripciones');
+const puntajeRouter = require("./routes/puntaje");
+const equipoRouter = requiere("./routes/equipo");
 
 dotenv.config();
 
@@ -37,6 +37,7 @@ app.use("/api/users", userRoute);
 app.use("/api/categorias", categoriasRoute);
 app.use("/api/ciclista", ciclistaRoute);
 app.use("/api/eventos", eventoRoute);
+app.use("/api/equipo", equipoRouter)
 app.use("/api/juez", juezRoute);
 app.use("/api/organizador", organizadorRoute);
 app.use("/api/rutas", rutaRoute);
