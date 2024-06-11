@@ -1,39 +1,43 @@
-import { createContext, useEffect, useReducer } from "react";
-import AuthReducer from "./AuthReducer";
-
-// Estado inicial de la autenticación
-const INITIAL_STATE = {
-  user: JSON.parse(localStorage.getItem("user")) || null, // Obtiene el usuario del localStorage o null si no existe
-  isFetching: false, // Indicador de si se está realizando una solicitud de autenticación
-  error: false, // Indicador de si hubo un error en la autenticación
-};
-
-// Creación del contexto de autenticación con el estado inicial
-export const AuthContext = createContext(INITIAL_STATE);
-
-// Proveedor del contexto de autenticación
-export const AuthContextProvider = ({ children }) => {
-  // Uso de useReducer para manejar el estado de autenticación
-  const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
-
-  // Efecto que se ejecuta cuando cambia el estado del usuario
-  useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(state.user)); // Guarda el usuario en el localStorage
-  }, [state.user]);
-
-  return (
-    // Proveedor del contexto de autenticación que envuelve a los componentes hijos
-    <AuthContext.Provider
-      value={{
-        user: state.user, // Usuario autenticado
-        isFetching: state.isFetching, // Indicador de solicitud en proceso
-        error: state.error, // Indicador de error
-        dispatch, // Función para despachar acciones
-      }}
-    >
-      {children} {/* Renderiza los componentes hijos */}
-    </AuthContext.Provider>
-  );
+// Función reductora para manejar el estado de autenticación
+const AuthReducer = (state, action) => {
+  switch (action.type) {
+    // Manejo de la acción LOGIN_START
+    case "LOGIN_START":
+      return {
+        user: null, // No hay usuario autenticado
+        isFetching: true, // Indica que se está realizando la autenticación
+        error: false, // No hay error
+      };
+    
+    // Manejo de la acción LOGIN_SUCCESS
+    case "LOGIN_SUCCESS":
+      return {
+        user: action.payload, // Usuario autenticado recibido en la acción
+        isFetching: false, // La autenticación ha terminado
+        error: false, // No hay error
+      };
+    
+    // Manejo de la acción LOGIN_FAILURE
+    case "LOGIN_FAILURE":
+      return {
+        user: null, // No hay usuario autenticado
+        isFetching: false, // La autenticación ha terminado
+        error: true, // Hubo un error en la autenticación
+      };
+    
+    // Manejo de la acción LOGOUT
+    case "LOGOUT":
+      localStorage.removeItem("user"); // Remueve el usuario del localStorage
+      return {
+        user: null, // No hay usuario autenticado
+        isFetching: false, // No se está realizando autenticación
+        error: false, // No hay error
+      };
+    
+    // Retorno por defecto, si la acción no es reconocida
+    default:
+      return state; // Devuelve el estado actual sin cambios
+  }
 };
 
 export default AuthReducer;
