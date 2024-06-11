@@ -3,7 +3,7 @@ import axios from 'axios';
 import Navbar from '../../components/navbar/Navbar';
 import './eventos.scss';
 
-// Componente Card
+// Componente Card que representa una tarjeta individual para cada evento
 const Card = ({ image, title, description, onClick }) => {
   return (
     <div className="card" onClick={onClick}>
@@ -18,16 +18,17 @@ const Card = ({ image, title, description, onClick }) => {
 
 // Componente principal Eventos
 const Eventos = () => {
-  const [eventos, setEventos] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedEvento, setSelectedEvento] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const intervalRef = useRef(null);
+  const [eventos, setEventos] = useState([]); // Estado para almacenar la lista de eventos
+  const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal
+  const [selectedEvento, setSelectedEvento] = useState(null); // Estado para almacenar el evento seleccionado
+  const [currentIndex, setCurrentIndex] = useState(0); // Estado para almacenar el índice actual del slider
+  const intervalRef = useRef(null); // Referencia para almacenar el intervalo del slider automático
 
+  // useEffect para obtener la lista de eventos al cargar el componente
   useEffect(() => {
     const fetchEventos = async () => {
       try {
-        const response = await axios.get('https://app-proyecto-api.vercel.app/api/eventos/obtener');
+        const response = await axios.get('https://app-proyecto-api.vercel.app/api/evento/obtener');
         setEventos(response.data);
       } catch (error) {
         console.error('Error fetching eventos:', error);
@@ -37,6 +38,7 @@ const Eventos = () => {
     fetchEventos();
   }, []);
 
+  // useEffect para iniciar el slider automático cuando se cargan los eventos
   useEffect(() => {
     if (eventos.length > 0) {
       startAutoSlide();
@@ -44,35 +46,41 @@ const Eventos = () => {
     return stopAutoSlide;
   }, [eventos]);
 
+  // Función para iniciar el slider automático
   const startAutoSlide = () => {
     intervalRef.current = setInterval(() => {
       goToNext();
-    }, 5000);
+    }, 5000); // Cambia de evento cada 5 segundos
   };
 
+  // Función para detener el slider automático
   const stopAutoSlide = () => {
     clearInterval(intervalRef.current);
   };
 
+  // Maneja el clic en una tarjeta de evento
   const handleCardClick = async (id) => {
     try {
-      const response = await axios.get(`https://app-proyecto-api.vercel.app/api/eventos/obtener/${id}`);
+      const response = await axios.get(`https://app-proyecto-api.vercel.app/api/evento/obtener/${id}`);
       setSelectedEvento(response.data);
-      setShowModal(true);
+      setShowModal(true); // Muestra el modal con la información del evento seleccionado
     } catch (error) {
       console.error('Error fetching evento:', error);
     }
   };
 
+  // Función para cerrar el modal
   const closeModal = () => {
     setShowModal(false);
     setSelectedEvento(null);
   };
 
+  // Función para ir al evento anterior en el slider
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? eventos.length - 1 : prevIndex - 1));
   };
 
+  // Función para ir al siguiente evento en el slider
   const goToNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % eventos.length);
   };
@@ -89,30 +97,30 @@ const Eventos = () => {
 return (
     <div>
       <div className="organizador">
-        <Navbar />
+        <Navbar /> {/* Componente Navbar */}
       </div>
-      <div className="featured" style={featuredStyle}></div>
+      <div className="featured" style={featuredStyle}></div> {/* Área destacada */}
       <div className="cards-container">
-        <button className="arrow arrow-left" onClick={goToPrevious}>&#8249;</button>
+        <button className="arrow arrow-left" onClick={goToPrevious}>&#8249;</button> {/* Botón para ir al evento anterior */}
         <div className="slider">
           <div className="cards" style={{ transform: `translateX(-${currentIndex * (100 / eventos.length)}%), width: ${100 * eventos.length}%` }}>
             {eventos.map((evento, index) => (
               <Card
                 key={evento._id}
-                image={evento.imagen || 'https://via.placeholder.com/150'}
-                title={evento.nombre}
-                description={evento.descripcion}
-                onClick={() => handleCardClick(evento._id)}
+                image={evento.imagen || 'https://via.placeholder.com/150'} // Imagen del evento o un placeholder
+                title={evento.nombre} // Nombre del evento
+                description={evento.descripcion} // Descripción del evento
+                onClick={() => handleCardClick(evento._id)} // Maneja el clic en la tarjeta
               />
             ))}
           </div>
         </div>
-        <button className="arrow arrow-right" onClick={goToNext}>&#8250;</button>
+        <button className="arrow arrow-right" onClick={goToNext}>&#8250;</button> {/* Botón para ir al siguiente evento */}
       </div>
-      {showModal && selectedEvento && (
+      {showModal && selectedEvento && ( // Modal para mostrar detalles del evento seleccionado
         <div className="modal">
           <div className="modal-content">
-            <span className="close" onClick={closeModal}>&times;</span>
+            <span className="close" onClick={closeModal}>&times;</span> {/* Botón para cerrar el modal */}
             <div>
               <h2>{selectedEvento.nombre}</h2>
             </div>
