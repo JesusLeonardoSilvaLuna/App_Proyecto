@@ -14,7 +14,7 @@ const rutaRoute = require("./routes/rutas");
 const noticiasRouter = require('./routes/noticias');
 const inscripcionesRouter = require('./routes/inscripciones');
 const puntajeRouter = require("./routes/puntaje");
-const equipoRouter = requiere("./routes/equipo");
+const equipoRouter = require("./routes/equipo");
 
 dotenv.config();
 
