@@ -57,7 +57,7 @@ const Perfil = () => {
 
     const fetchEvents = async () => {
       try {
-        const res = await axios.get(`https://app-proyecto-api.vercel.app/api/evento/obtener`, {
+        const res = await axios.get(`https://app-proyecto-api.vercel.app/api/eventos/obtener`, {
           headers: {
             'Authorization': 'Bearer ' + token
           },
