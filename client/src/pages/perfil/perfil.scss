@@ -427,7 +427,7 @@
     .detail-item {
       display: flex;
       align-items: center;
-      margin-bottom: -10px;
+      margin-bottom: 10px;
 
       .detail-icon {
         margin-right: 30px;
@@ -447,6 +447,9 @@
     border: none;
     cursor: pointer;
     margin-top: 20px;
+    position: absolute;
+    top: 200%;
+    left: 20%;
 
     &:hover {
       background-color: #555;
