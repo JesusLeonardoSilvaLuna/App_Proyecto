@@ -27,7 +27,7 @@ const Eventos = () => {
   useEffect(() => {
     const fetchEventos = async () => {
       try {
-        const response = await axios.get('https://app-proyecto-api.vercel.app/api/evento/obtener');
+        const response = await axios.get('https://app-proyecto-api.vercel.app/api/eventos/obtener');
         setEventos(response.data);
       } catch (error) {
         console.error('Error fetching eventos:', error);
@@ -56,7 +56,7 @@ const Eventos = () => {
 
   const handleCardClick = async (id) => {
     try {
-      const response = await axios.get(`https://app-proyecto-api.vercel.app/api/evento/obtener/${id}`);
+      const response = await axios.get(`https://app-proyecto-api.vercel.app/api/eventos/obtener/${id}`);
       setSelectedEvento(response.data);
       setShowModal(true);
     } catch (error) {
